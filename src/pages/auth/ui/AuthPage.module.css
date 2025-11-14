@@ -1,0 +1,9 @@
+.authPage {
+	min-height: 100vh;
+	width: 100%;
+}
+
+.tabs {
+	min-width: 300px;
+	min-height: 400px;
+}

@@ -1,13 +1,11 @@
-import { Tabs } from 'antd';
-import type { TabsProps } from 'antd';
-import { SignInForm } from '../../../features/auth/sign-in/ui/SignInForm';
-import { SignUpForm } from '../../../features/auth/sign-up/ui/SignUpForm';
-
-const authTabs: TabsProps['items'] = [
-	{ key: '1', label: 'Sign In', children: <SignInForm /> },
-	{ key: '2', label: 'Sign Up', children: <SignUpForm /> },
-];
+import { Tabs, Flex } from 'antd';
+import { authTabs } from '../model/tabs';
+import styles from './AuthPage.module.css';
 
 export function AuthPage() {
-	return <Tabs defaultActiveKey='login' items={authTabs} />;
+	return (
+		<Flex justify='center' align='center' className={styles.authPage}>
+			<Tabs defaultActiveKey='1' items={authTabs} className={styles.tabs} />
+		</Flex>
+	);
 }

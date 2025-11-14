@@ -1,10 +1,10 @@
-import { MainLayout } from '../shared/layouts/MainLayout/MainLayout';
-import { AuthPage } from '../pages/auth/ui/AuthPage';
+import { MainLayout } from '@/shared/layouts/MainLayout/MainLayout';
+import { AppRouter } from '@/app/providers/router/ui/AppRouter';
 
 function App() {
 	return (
 		<MainLayout>
-			<AuthPage />
+			<AppRouter />
 		</MainLayout>
 	);
 }
