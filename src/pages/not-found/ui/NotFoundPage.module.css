@@ -1,0 +1,8 @@
+.wrapper {
+	min-height: 100vh;
+}
+
+.title {
+	font-size: 3rem;
+	color: #000;
+}

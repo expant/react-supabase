@@ -13,7 +13,7 @@ export function SignUpForm() {
 			setLoading(true);
 			await signUp(values);
 			message.success('Регистрация прошла успешно!');
-			navigate('/dashboard');
+			navigate('/dashboard', { replace: true });
 		} catch (error) {
 			message.error('Ошибка при регистрации: ' + (error as Error).message);
 		} finally {
