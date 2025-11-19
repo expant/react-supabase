@@ -12,7 +12,6 @@ export function SignUpForm() {
 		try {
 			setLoading(true);
 			await signUp(values);
-			message.success('Регистрация прошла успешно!');
 			navigate('/dashboard', { replace: true });
 		} catch (error) {
 			message.error('Ошибка при регистрации: ' + (error as Error).message);

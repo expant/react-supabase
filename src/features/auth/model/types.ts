@@ -1,11 +1,14 @@
 import type { Session, AuthChangeEvent } from '@supabase/supabase-js';
 
+export type SessionType = Session | null;
+export type UnsubscribeType = (() => void) | null;
+
 export type AuthContextType = {
-	session: Session | null;
+	session: SessionType;
 	isLoading: boolean;
 };
 
 export type subscribeToAuthChangesArg = (
 	event: AuthChangeEvent,
-	session: Session | null
+	session: SessionType
 ) => void;

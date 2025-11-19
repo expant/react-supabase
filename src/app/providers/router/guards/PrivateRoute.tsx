@@ -1,6 +1,13 @@
 import { Outlet, Navigate } from 'react-router';
-import { supabase } from '@/shared/api/supabaseClient';
+import { Spin } from 'antd';
+import { useAuth } from '@/features/auth/model/hooks/useAuth';
 
 export function PrivateRoute() {
-	// return isAuth ? <Outlet /> : <Navigate to='/auth' replace />;
+	const { session, isLoading } = useAuth();
+
+	if (isLoading) {
+		return <Spin size='large' />;
+	}
+
+	return session ? <Outlet /> : <Navigate to='/auth' replace />;
 }

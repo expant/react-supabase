@@ -2,14 +2,14 @@ import { useState, useEffect, type ReactNode } from 'react';
 import { AuthContext } from './context';
 import { loadInitialSession } from './lib/loadInitialSession';
 import { subscribeToAuthChanges } from './lib/subscribeToAuthChanges';
-import type { Session } from '@supabase/supabase-js';
+import type { UnsubscribeType, SessionType } from './types';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-	const [session, setSession] = useState<Session | null>(null);
+	const [session, setSession] = useState<SessionType>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		let unsubscribe: (() => void) | null = null;
+		let unsubscribe: UnsubscribeType = null;
 
 		(async () => {
 			const initialSession = await loadInitialSession();
