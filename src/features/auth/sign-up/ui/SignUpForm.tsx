@@ -1,30 +1,15 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { Form, Input, Button, message } from 'antd';
-import { signUp } from '../api/signUp';
+import { Form, Input, Button } from 'antd';
+import { useSignUp } from '../model/hooks/useSignUp';
 import type { SignUpFormValues } from '../model/types';
 
 export function SignUpForm() {
-	const [loading, setLoading] = useState(false);
-	const navigate = useNavigate();
-
-	const handleFinish = async (values: SignUpFormValues) => {
-		try {
-			setLoading(true);
-			await signUp(values);
-			navigate('/dashboard', { replace: true });
-		} catch (error) {
-			message.error('Ошибка при регистрации: ' + (error as Error).message);
-		} finally {
-			setLoading(false);
-		}
-	};
+	const { handleSignUp, loading } = useSignUp();
 
 	return (
 		<Form<SignUpFormValues>
 			layout='vertical'
 			validateTrigger='onBlur'
-			onFinish={handleFinish}
+			onFinish={handleSignUp}
 		>
 			<Form.Item
 				label='Email'

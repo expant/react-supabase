@@ -1,5 +1,5 @@
 import { Tabs, Flex } from 'antd';
-import { authTabs } from '../model/tabs';
+import { authTabs } from './tabs';
 import styles from './AuthPage.module.css';
 
 export function AuthPage() {
