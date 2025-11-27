@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router';
 import { AuthPage } from '@/pages/auth/ui/AuthPage/AuthPage';
 import { PrivateRoute } from '../guards/PrivateRoute';
 import { PublicRoute } from '../guards/PublicRoute';
+import { RecoveryRoute } from '../guards/RecoveryRoute';
 import { DashboardPage } from '@/pages/dashboard/ui/DashboardPage';
 import { NotFoundPage } from '@/pages/not-found/ui/NotFoundPage';
 import { ResetPasswordPage } from '@/pages/auth/ui/ResetPasswordPage/ResetPasswordPage';
@@ -18,7 +19,7 @@ export function AppRouter() {
 					<Route path='reset-password' element={<ResetPasswordPage />} />
 				</Route>
 
-				<Route element={<PrivateRoute />}>
+				<Route element={<RecoveryRoute />}>
 					<Route path='new-password' element={<NewPasswordPage />} />
 				</Route>
 			</Route>

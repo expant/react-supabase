@@ -3,11 +3,12 @@ import { Spin } from 'antd';
 import { useAuth } from '@/features/auth/model/hooks/useAuth';
 
 export function PrivateRoute() {
-	const { session, isLoading } = useAuth();
+	const { session, isLoading, isRecovering } = useAuth();
 
-	if (isLoading) {
-		return <Spin size='large' />;
-	}
+	if (isLoading) return <Spin size='large' />;
+	if (!session) return <Navigate to='/auth' replace />;
 
-	return session ? <Outlet /> : <Navigate to='/auth' replace />;
+	if (isRecovering) return <Navigate to='/auth/new-password' replace />;
+
+	return <Outlet />;
 }

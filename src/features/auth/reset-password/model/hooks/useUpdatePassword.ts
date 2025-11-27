@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { message } from 'antd';
 import { updatePassword } from '../../api/updatePassword';
 
-export function useResetPassword() {
+export function useUpdatePassword() {
 	const [loading, setLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 
-	const handleReset = async ({ password }: { password: string }) => {
+	const handleUpdate = async ({ password }: { password: string }) => {
 		try {
 			setLoading(true);
 			await updatePassword(password);
@@ -20,5 +20,5 @@ export function useResetPassword() {
 		}
 	};
 
-	return { handleReset, loading, isSuccess };
+	return { handleUpdate, loading, isSuccess };
 }

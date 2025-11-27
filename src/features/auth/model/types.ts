@@ -4,9 +4,18 @@ export type SessionType = Session | null;
 export type AuthEventType = string | null;
 export type UnsubscribeType = (() => void) | null;
 
+export type createAuthStateChangeHandlerDeps = {
+	setSession: (session: SessionType) => void;
+	setIsRecovering: (value: boolean) => void;
+};
+
+export type handleAuthStateChangeArgs = {
+	event: AuthEventType;
+	session: SessionType;
+};
+
 export type AuthContextType = {
 	session: SessionType;
-	authEvent: AuthEventType;
 	isLoading: boolean;
 	isRecovering: boolean;
 };

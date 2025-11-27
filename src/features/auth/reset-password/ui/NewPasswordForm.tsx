@@ -1,23 +1,20 @@
-import { Link } from 'react-router';
-import { Form, Input, Button, Typography } from 'antd';
-import { useResetPassword } from '../model/hooks/useResetPassword';
-
-const { Paragraph } = Typography;
+import { Form, Input, Button } from 'antd';
+import { useUpdatePassword } from '../model/hooks/useUpdatePassword';
+import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 export function NewPasswordForm() {
-	const { handleReset, loading, isSuccess } = useResetPassword();
+	const { handleUpdate, loading, isSuccess } = useUpdatePassword();
+	const navigate = useNavigate();
 
-	if (isSuccess) {
-		return (
-			<div>
-				<Paragraph>Пароль успешно изменен.</Paragraph>
-				<Link to='/auth'>Вернутся на страницу входа.</Link>
-			</div>
-		);
-	}
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/dashboard');
+		}
+	}, [isSuccess, navigate]);
 
 	return (
-		<Form layout='vertical' validateTrigger='onBlur' onFinish={handleReset}>
+		<Form layout='vertical' validateTrigger='onBlur' onFinish={handleUpdate}>
 			<Form.Item
 				label='Новый пароль'
 				name='password'
