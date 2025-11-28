@@ -1,12 +1,11 @@
-import { Outlet } from 'react-router';
+import { Outlet, Navigate } from 'react-router';
+import { FullPageSpinner } from '@/shared/layouts/FullPageSpinner/FullPageSpinner';
 import { useAuth } from '@/features/auth/model/hooks/useAuth';
-import { Spin } from 'antd';
-import { Navigate } from 'react-router';
 
 export function RecoveryRoute() {
 	const { isLoading, session } = useAuth();
 
-	if (isLoading) return <Spin size='large' />;
+	if (isLoading) return <FullPageSpinner />;
 	if (!session) return <Navigate to='/auth' replace />;
 
 	return <Outlet />;
