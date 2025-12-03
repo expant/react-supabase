@@ -9,5 +9,5 @@ export function PublicRoute() {
 		return <FullPageSpinner />;
 	}
 
-	return !session ? <Outlet /> : <Navigate to='/dashboard' replace />;
+	return !session ? <Outlet /> : <Navigate to='/feed' replace />;
 }

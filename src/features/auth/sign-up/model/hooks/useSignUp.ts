@@ -12,7 +12,7 @@ export function useSignUp() {
 		try {
 			setLoading(true);
 			await signUp(values);
-			navigate('/dashboard', { replace: true });
+			navigate('/feed', { replace: true });
 		} catch (error) {
 			message.error(
 				error instanceof Error ? error.message : 'Ошибка регистрации'

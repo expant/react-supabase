@@ -9,7 +9,7 @@ export function NewPasswordForm() {
 
 	useEffect(() => {
 		if (isSuccess) {
-			navigate('/dashboard');
+			navigate('/feed');
 		}
 	}, [isSuccess, navigate]);
 

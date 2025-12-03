@@ -3,10 +3,12 @@ import { AuthPage } from '@/pages/auth/ui/AuthPage/AuthPage';
 import { PrivateRoute } from '../guards/PrivateRoute';
 import { PublicRoute } from '../guards/PublicRoute';
 import { RecoveryRoute } from '../guards/RecoveryRoute';
-import { DashboardPage } from '@/pages/dashboard/ui/DashboardPage';
+import { FeedPage } from '@/pages/feed/ui/FeedPage';
 import { NotFoundPage } from '@/pages/not-found/ui/NotFoundPage';
 import { ResetPasswordPage } from '@/pages/auth/ui/ResetPasswordPage/ResetPasswordPage';
 import { NewPasswordPage } from '@/pages/auth/ui/NewPasswordPage/NewPasswordPage';
+import { MainLayout } from '@/shared/layouts/MainLayout/ui/MainLayout';
+import { AuthLayout } from '@/shared/layouts/AuthLayout/AuthLayout';
 
 export function AppRouter() {
 	return (
@@ -14,18 +16,21 @@ export function AppRouter() {
 			<Route path='/' element={<Navigate to='/auth' replace />} />
 
 			<Route path='auth'>
-				<Route element={<PublicRoute />}>
-					<Route index element={<AuthPage />} />
-					<Route path='reset-password' element={<ResetPasswordPage />} />
-				</Route>
-
-				<Route element={<RecoveryRoute />}>
-					<Route path='new-password' element={<NewPasswordPage />} />
+				<Route element={<AuthLayout />}>
+					<Route element={<PublicRoute />}>
+						<Route index element={<AuthPage />} />
+						<Route path='reset-password' element={<ResetPasswordPage />} />
+					</Route>
+					<Route element={<RecoveryRoute />}>
+						<Route path='new-password' element={<NewPasswordPage />} />
+					</Route>
 				</Route>
 			</Route>
 
 			<Route element={<PrivateRoute />}>
-				<Route path='dashboard' element={<DashboardPage />} />
+				<Route element={<MainLayout />}>
+					<Route path='feed' element={<FeedPage />} />
+				</Route>
 			</Route>
 
 			<Route path='*' element={<NotFoundPage />} />

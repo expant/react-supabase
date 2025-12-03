@@ -14,7 +14,7 @@ export function useSignIn() {
 
 			await signIn(values);
 
-			navigate('/dashboard', { replace: true });
+			navigate('/feed', { replace: true });
 		} catch (error) {
 			message.error(error instanceof Error ? error.message : 'Ошибка входа');
 		} finally {
