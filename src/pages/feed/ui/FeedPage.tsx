@@ -1,11 +1,11 @@
 import { Flex } from 'antd';
-import { PollFeed } from '@/widgets/poll-feed/ui/PollFeed';
+import { PollList } from '@/widgets/poll-list/ui/PollList';
 import styles from './FeedPage.module.css';
 
 export function FeedPage() {
 	return (
 		<Flex className={styles.feed}>
-			<PollFeed />
+			<PollList />
 		</Flex>
 	);
 }
