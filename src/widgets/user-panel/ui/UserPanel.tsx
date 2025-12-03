@@ -9,7 +9,7 @@ export function UserPanel() {
 	const user = useUser();
 
 	return (
-		<Flex className={styles.container}>
+		<Flex className={styles.userPanel}>
 			<Text className={styles.email}>{user.email}</Text>
 			<LoggoutButton />
 		</Flex>
