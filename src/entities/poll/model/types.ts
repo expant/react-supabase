@@ -15,4 +15,8 @@ export type Poll = {
 
 export type PollCardProps = {
 	poll: Poll;
+	value: number | null;
+	disabled?: boolean;
+	onChange: (optionId: number) => void;
+	onCancel: () => void;
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Space, Spin } from 'antd';
-import { PollCard } from '@/entities/poll/ui/PollCard';
+import { PollVoteCard } from '@/features/poll/vote/ui/PollVoteCard';
 import { getPolls } from '@/entities/poll/api/pollApi';
 import type { Poll } from '@/entities/poll/model/types';
 import styles from './PollList.module.css';
@@ -28,7 +28,7 @@ export function PollList() {
 			{isLoading && <Spin className={styles.spin} />}
 
 			{polls.map((poll) => (
-				<PollCard key={poll.id} poll={poll} />
+				<PollVoteCard key={poll.id} poll={poll} />
 			))}
 		</Space>
 	);
