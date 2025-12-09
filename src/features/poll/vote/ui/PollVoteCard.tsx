@@ -3,7 +3,7 @@ import { usePollVote } from '../model/hooks/usePollVote';
 import type { PollVoteCardProps } from '../model/types';
 
 export function PollVoteCard({ poll }: PollVoteCardProps) {
-	const { value, error, isVoted, isLoading } = usePollVote({
+	const { value, error, isVoted, isLoading, vote } = usePollVote({
 		pollId: poll.id,
 	});
 
@@ -17,7 +17,7 @@ export function PollVoteCard({ poll }: PollVoteCardProps) {
 			value={value}
 			disabled={isVoted}
 			isLoading={isLoading}
-			// onChange={vote}
+			onChange={vote}
 			// onCancel={cancel}
 		/>
 	);

@@ -13,7 +13,7 @@ export type UsePollVoteResult = {
 	isVoted: boolean;
 	isLoading: boolean;
 	error: string | null;
-	// vote: (optionId: number) => Promise<void>;
+	vote: (optionId: number) => Promise<void>;
 	// cancel: () => Promise<void>;
 };
 

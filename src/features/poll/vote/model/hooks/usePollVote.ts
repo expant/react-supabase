@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { sendVote } from '../../api/sendVote';
 import { loadMyVote } from '../../api/loadMyVote';
 import type { UsePollVoteProps, UsePollVoteResult } from '../types';
 
@@ -33,10 +34,19 @@ export function usePollVote({ pollId }: UsePollVoteProps): UsePollVoteResult {
 		fetch();
 	}, [pollId]);
 
-	// const vote = (optionId: number) => {
-	// 	setValue(optionId);
-	// 	setIsVoted(true);
-	// };
+	const vote = async (optionId: number) => {
+		setIsLoading(true);
+
+		try {
+			await sendVote(pollId, optionId);
+			setValue(optionId);
+			setIsVoted(true);
+		} catch (e) {
+			setError(e instanceof Error ? e.message : 'Ошибка голосования');
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	// const cancel = () => {
 	// 	setValue(null);
@@ -48,7 +58,7 @@ export function usePollVote({ pollId }: UsePollVoteProps): UsePollVoteResult {
 		isVoted,
 		isLoading,
 		error,
-		// vote,
+		vote,
 		// cancel,
 	};
 }

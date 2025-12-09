@@ -1,5 +1,5 @@
 import { Button, Card, Radio, Skeleton } from 'antd';
-// import type { RadioChangeEvent } from 'antd';
+import type { RadioChangeEvent } from 'antd';
 import type { PollCardProps } from '../model/types';
 import styles from './PollCard.module.css';
 
@@ -8,8 +8,8 @@ export function PollCard({
 	value,
 	disabled,
 	isLoading,
-}: // onChange,
-// onCancel,
+	onChange,
+}: // onCancel,
 PollCardProps) {
 	const { poll_options, question } = poll;
 
@@ -18,9 +18,9 @@ PollCardProps) {
 		label: <div className={styles.option}>{option.text}</div>,
 	}));
 
-	// const handleChange = (e: RadioChangeEvent) => {
-	// 	onChange(e.target.value);
-	// };
+	const handleChange = (e: RadioChangeEvent) => {
+		onChange(e.target.value);
+	};
 
 	if (isLoading)
 		return (
@@ -34,7 +34,7 @@ PollCardProps) {
 			<Radio.Group
 				value={value}
 				options={options}
-				onChange={() => {}}
+				onChange={handleChange}
 				disabled={disabled}
 				className={styles.options}
 			/>
