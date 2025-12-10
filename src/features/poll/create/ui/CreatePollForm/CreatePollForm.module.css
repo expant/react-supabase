@@ -1,0 +1,9 @@
+.option {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.optionInput {
+	flex: 1;
+	margin-bottom: 0;
+}
