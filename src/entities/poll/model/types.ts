@@ -19,5 +19,5 @@ export type PollCardProps = {
 	disabled?: boolean;
 	isLoading: boolean;
 	onChange: (optionId: number) => void;
-	// onCancel: () => void;
+	onCancel: () => void;
 };

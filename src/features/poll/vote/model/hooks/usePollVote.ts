@@ -1,38 +1,39 @@
 import { useEffect, useState } from 'react';
 import { sendVote } from '../../api/sendVote';
 import { loadMyVote } from '../../api/loadMyVote';
-import type { UsePollVoteProps, UsePollVoteResult } from '../types';
+import { cancelVote } from '../../api/cancelVote';
+import type { UsePollVoteProps } from '../types';
 
-export function usePollVote({ pollId }: UsePollVoteProps): UsePollVoteResult {
+export function usePollVote({ pollId }: UsePollVoteProps) {
 	const [value, setValue] = useState<number | null>(null);
 	const [isVoted, setIsVoted] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		const fetch = async () => {
-			setIsLoading(true);
-			setError(null);
-
-			try {
-				const { optionId } = await loadMyVote(pollId);
-
-				if (optionId) {
-					setValue(optionId);
-					setIsVoted(true);
-				} else {
-					setValue(null);
-					setIsVoted(false);
-				}
-			} catch (e) {
-				setError(e instanceof Error ? e.message : 'Ошибка загрузки голоса');
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		fetch();
+		loadVote();
 	}, [pollId]);
+
+	const loadVote = async () => {
+		setIsLoading(true);
+		setError(null);
+
+		try {
+			const { optionId } = await loadMyVote(pollId);
+
+			if (optionId) {
+				setValue(optionId);
+				setIsVoted(true);
+			} else {
+				setValue(null);
+				setIsVoted(false);
+			}
+		} catch (e) {
+			setError(e instanceof Error ? e.message : 'Ошибка загрузки голоса');
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	const vote = async (optionId: number) => {
 		setIsLoading(true);
@@ -48,10 +49,19 @@ export function usePollVote({ pollId }: UsePollVoteProps): UsePollVoteResult {
 		}
 	};
 
-	// const cancel = () => {
-	// 	setValue(null);
-	// 	setIsVoted(false);
-	// };
+	const cancel = async () => {
+		setIsLoading(true);
+
+		try {
+			await cancelVote(pollId);
+			setValue(null);
+			setIsVoted(false);
+		} catch (e) {
+			setError(e instanceof Error ? e.message : 'Ошибка отмены голосования');
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	return {
 		value,
@@ -59,6 +69,6 @@ export function usePollVote({ pollId }: UsePollVoteProps): UsePollVoteResult {
 		isLoading,
 		error,
 		vote,
-		// cancel,
+		cancel,
 	};
 }
