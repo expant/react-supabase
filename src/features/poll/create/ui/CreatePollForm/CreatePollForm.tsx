@@ -1,28 +1,35 @@
 import { Form, Input, Button, Space, Typography } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useCreatePollForm } from '../../model/hooks/useCreatePollForm';
+import type { CreatePollFormProps } from '../../model/types';
 import styles from './CreatePollForm.module.css';
 
 const { Title } = Typography;
 
-export function CreatePollForm() {
+export function CreatePollForm({ onCloseModal }: CreatePollFormProps) {
 	const {
 		form,
 		options,
-		onFinish,
+		isLoading,
+		submit,
 		addOption,
 		handleOptionChange,
 		removeOption,
 		canRemoveOption,
 	} = useCreatePollForm();
 
+	const handleFinish = async () => {
+		await submit();
+		onCloseModal();
+	};
+
 	return (
 		<Form
 			form={form}
 			layout='vertical'
-			onFinish={onFinish}
+			onFinish={handleFinish}
 			initialValues={{
-				title: '',
+				question: '',
 				options: options,
 			}}
 		>
@@ -30,7 +37,7 @@ export function CreatePollForm() {
 
 			<Form.Item
 				label='Вопрос'
-				name='title'
+				name='question'
 				rules={[{ required: true, message: 'Введите вопрос' }]}
 			>
 				<Input />
@@ -60,7 +67,6 @@ export function CreatePollForm() {
 				</Space>
 			))}
 
-			{/* TODO: В supabase тоже ограничить количество вариантов */}
 			{options.length <= 10 && (
 				<Form.Item>
 					<Button type='dashed' onClick={addOption} block>
@@ -70,7 +76,13 @@ export function CreatePollForm() {
 			)}
 
 			<Form.Item>
-				<Button type='primary' htmlType='submit' block>
+				<Button
+					type='primary'
+					htmlType='submit'
+					block
+					disabled={isLoading}
+					loading={isLoading}
+				>
 					Создать опрос
 				</Button>
 			</Form.Item>

@@ -12,7 +12,6 @@ export function PollList() {
 	useEffect(() => {
 		getPolls()
 			.then((res) => {
-				console.log(res);
 				setPolls(res);
 			})
 			.catch((err) => {

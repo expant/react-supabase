@@ -7,7 +7,7 @@ export function CreatePollModal({ isOpen, onClose }: CreatePollModalProps) {
 
 	return (
 		<Modal open={isOpen} onCancel={onClose} footer={null} centered>
-			<CreatePollForm />
+			<CreatePollForm onCloseModal={onClose} />
 		</Modal>
 	);
 }

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Form } from 'antd';
+import { Form, message } from 'antd';
+import { createPoll } from '../../api/createPoll';
 
 export function useCreatePollForm() {
 	const [form] = Form.useForm();
 	const [options, setOptions] = useState<string[]>(['', '']);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const addOption = () => setOptions([...options, '']);
 
@@ -19,14 +21,24 @@ export function useCreatePollForm() {
 	const canRemoveOption = (optionsLength: number, index: number) =>
 		optionsLength > 2 && index > 1;
 
-	const onFinish = () => {
-		console.log(options);
+	const submit = async () => {
+		setIsLoading(true);
+		const question = form.getFieldValue('question');
+
+		try {
+			await createPoll(question, options);
+		} catch (e) {
+			message.error(e instanceof Error ? e.message : 'Ошибка создания опроса');
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return {
 		form,
 		options,
-		onFinish,
+		isLoading,
+		submit,
 		setOptions,
 		addOption,
 		removeOption,
