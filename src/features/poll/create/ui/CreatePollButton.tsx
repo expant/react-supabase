@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Button } from 'antd';
 import { CreatePollModal } from './CreatePollModal/CreatePollModal';
+import type { CreatePollButtonProps } from '../model/types';
 
-export function CreatePollButton() {
+export function CreatePollButton({ onCreated }: CreatePollButtonProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const closeModal = () => setIsOpen(false);
@@ -12,7 +13,11 @@ export function CreatePollButton() {
 			<Button onClick={() => setIsOpen(true)} size='large' type='primary'>
 				Создать опрос
 			</Button>
-			<CreatePollModal isOpen={isOpen} onClose={closeModal} />
+			<CreatePollModal
+				isOpen={isOpen}
+				onClose={closeModal}
+				onCreated={onCreated}
+			/>
 		</>
 	);
 }

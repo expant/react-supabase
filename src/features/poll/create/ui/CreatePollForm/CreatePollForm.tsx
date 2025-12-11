@@ -6,7 +6,10 @@ import styles from './CreatePollForm.module.css';
 
 const { Title } = Typography;
 
-export function CreatePollForm({ onCloseModal }: CreatePollFormProps) {
+export function CreatePollForm({
+	onCloseModal,
+	onCreated,
+}: CreatePollFormProps) {
 	const {
 		form,
 		options,
@@ -20,6 +23,7 @@ export function CreatePollForm({ onCloseModal }: CreatePollFormProps) {
 
 	const handleFinish = async () => {
 		await submit();
+		onCreated();
 		onCloseModal();
 	};
 
