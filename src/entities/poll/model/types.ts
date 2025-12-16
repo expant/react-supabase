@@ -19,7 +19,7 @@ export type Poll = PollRow & {
 
 export type PollCardProps = {
 	poll: Poll;
-	value: number | null;
+	optionId: number | null;
 	disabled?: boolean;
 	isLoading: boolean;
 	onChange: (optionId: number) => void;

@@ -5,7 +5,8 @@ import { useFeedPage } from '../model/hooks/useFeedPage';
 import styles from './FeedPage.module.css';
 
 export function FeedPage() {
-	const { polls, newPollsCount, isLoading, showNewPolls } = useFeedPage();
+	const { polls, userVotes, newPollsCount, isLoading, showNewPolls } =
+		useFeedPage();
 
 	return (
 		<Flex className={styles.feed}>
@@ -17,7 +18,7 @@ export function FeedPage() {
 				</Button>
 			)}
 
-			<PollList polls={polls} isLoading={isLoading} />
+			<PollList polls={polls} userVotes={userVotes} isLoading={isLoading} />
 		</Flex>
 	);
 }

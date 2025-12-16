@@ -5,7 +5,7 @@ import styles from './PollCard.module.css';
 
 export function PollCard({
 	poll,
-	value,
+	optionId,
 	disabled,
 	isLoading,
 	onChange,
@@ -23,7 +23,7 @@ export function PollCard({
 	return (
 		<Card title={question} className={styles.card}>
 			<Radio.Group
-				value={value}
+				value={optionId}
 				options={options}
 				onChange={handleChange}
 				disabled={disabled}

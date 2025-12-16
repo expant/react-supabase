@@ -1,14 +1,12 @@
 import type { Poll } from '@/entities/poll/model/types';
+import type { Vote } from '@/entities/vote/model/types';
 
 export type PollVoteCardProps = {
 	poll: Poll;
+	userVote: Vote | null;
 };
 
 export type UsePollVoteProps = {
 	pollId: number;
-};
-
-export type LoadMyVoteResult = {
-	optionId: number | null;
-	isAuthenticated: boolean;
+	userVote: Vote | null;
 };

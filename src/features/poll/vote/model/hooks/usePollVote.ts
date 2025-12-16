@@ -1,46 +1,24 @@
 import { useEffect, useState } from 'react';
-import { sendVote } from '../../api/sendVote';
-import { loadMyVote } from '../../api/loadMyVote';
-import { cancelVote } from '../../api/cancelVote';
+import { sendVote, cancelVote } from '@/entities/vote/api/voteApi';
 import type { UsePollVoteProps } from '../types';
 
-export function usePollVote({ pollId }: UsePollVoteProps) {
-	const [value, setValue] = useState<number | null>(null);
+export function usePollVote({ pollId, userVote }: UsePollVoteProps) {
+	const [optionId, setOptionId] = useState<number | null>(null);
 	const [isVoted, setIsVoted] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		loadVote();
-	}, [pollId]);
-
-	const loadVote = async () => {
-		setIsLoading(true);
-		setError(null);
-
-		try {
-			const { optionId } = await loadMyVote(pollId);
-
-			if (optionId) {
-				setValue(optionId);
-				setIsVoted(true);
-			} else {
-				setValue(null);
-				setIsVoted(false);
-			}
-		} catch (e) {
-			setError(e instanceof Error ? e.message : 'Ошибка загрузки голоса');
-		} finally {
-			setIsLoading(false);
-		}
-	};
+		setOptionId(userVote?.option_id ?? null);
+		setIsVoted(!!userVote);
+	}, [userVote]);
 
 	const vote = async (optionId: number) => {
 		setIsLoading(true);
 
 		try {
 			await sendVote(pollId, optionId);
-			setValue(optionId);
+			setOptionId(optionId);
 			setIsVoted(true);
 		} catch (e) {
 			setError(e instanceof Error ? e.message : 'Ошибка голосования');
@@ -54,7 +32,7 @@ export function usePollVote({ pollId }: UsePollVoteProps) {
 
 		try {
 			await cancelVote(pollId);
-			setValue(null);
+			setOptionId(null);
 			setIsVoted(false);
 		} catch (e) {
 			setError(e instanceof Error ? e.message : 'Ошибка отмены голосования');
@@ -64,7 +42,7 @@ export function usePollVote({ pollId }: UsePollVoteProps) {
 	};
 
 	return {
-		value,
+		optionId,
 		isVoted,
 		isLoading,
 		error,
