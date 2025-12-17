@@ -6,7 +6,7 @@ export function getPollViewModel(
 	poll: Poll,
 	onChange: (optionId: number) => void
 ) {
-	const { poll_options, question } = poll;
+	const { poll_options, question, votes_count } = poll;
 
 	const options = poll_options.map((option) => ({
 		value: option.id,
@@ -21,5 +21,6 @@ export function getPollViewModel(
 		question,
 		options,
 		handleChange,
+		votesCount: votes_count,
 	};
 }

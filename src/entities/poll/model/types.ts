@@ -11,6 +11,7 @@ export type PollRow = {
 	is_anonymous: boolean;
 	created_at: string;
 	author_id: string;
+	votes_count: number;
 };
 
 export type Poll = PollRow & {
@@ -27,3 +28,6 @@ export type PollCardProps = {
 };
 
 export type OnPollInserted = (pollRow: PollRow) => void;
+export type onPollVotesCountUpdated = (
+	data: Pick<PollRow, 'id' | 'votes_count'>
+) => void;

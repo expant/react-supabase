@@ -11,7 +11,10 @@ export function PollCard({
 	onChange,
 	onCancel,
 }: PollCardProps) {
-	const { question, options, handleChange } = getPollViewModel(poll, onChange);
+	const { question, options, votesCount, handleChange } = getPollViewModel(
+		poll,
+		onChange
+	);
 
 	if (isLoading)
 		return (
@@ -35,6 +38,8 @@ export function PollCard({
 					Отменить голос
 				</Button>
 			)}
+
+			<span>{votesCount}</span>
 		</Card>
 	);
 }

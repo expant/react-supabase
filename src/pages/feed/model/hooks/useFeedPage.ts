@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { message } from 'antd';
 import { getPolls } from '@/entities/poll/api/pollApi';
 import { getUserVotes } from '@/entities/vote/api/voteApi';
-import { subscribeToNewPolls } from '@/entities/poll/api/pollRealtime';
+import {
+	subscribeToNewPolls,
+	subscribeToPollVotesCount,
+} from '@/entities/poll/api/pollRealtime';
 import { useUser } from '@/features/auth/model/hooks/useUser';
 import type { Poll } from '@/entities/poll/model/types';
 import type { Vote } from '@/entities/vote/model/types';
@@ -64,8 +67,22 @@ export function useFeedPage() {
 			setNewPollsCount((prev) => prev + 1);
 		});
 
-		return () => unsubscribe();
+		return () => {
+			unsubscribe();
+		};
 	}, [user.id]);
+
+	useEffect(() => {
+		const unsubscribe = subscribeToPollVotesCount(({ id, votes_count }) => {
+			setPolls((prev) =>
+				prev.map((p) => (p.id === id ? { ...p, votes_count } : p))
+			);
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
 	const showNewPolls = async () => {
 		await loadPolls();
