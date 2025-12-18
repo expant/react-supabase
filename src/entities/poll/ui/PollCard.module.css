@@ -1,5 +1,6 @@
 .card {
 	width: 100%;
+	text-align: left;
 }
 .options {
 	display: flex;
@@ -45,4 +46,13 @@
 
 .cancelButton {
 	margin-top: 20px;
+}
+
+.votesCount {
+	display: block;
+	margin-top: 20px;
+}
+
+.checkSquareOutlinedIcon {
+	margin-right: 5px;
 }

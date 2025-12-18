@@ -6,3 +6,20 @@
 	margin: 0 auto;
 	padding: 50px 0;
 }
+
+.feedContent {
+	flex-direction: column;
+	gap: 15px;
+	min-width: 450px;
+}
+
+.newPollsBtn {
+	width: 50%;
+	margin: 0 auto;
+	opacity: 0.85;
+	padding: 15px 0;
+}
+
+.newPollsBtn:hover {
+	opacity: 1;
+}

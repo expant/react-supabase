@@ -1,7 +1,10 @@
-import { Button, Card, Radio, Skeleton } from 'antd';
+import { Button, Card, Radio, Skeleton, Typography } from 'antd';
+import { CheckSquareOutlined } from '@ant-design/icons';
 import { getPollViewModel } from '../model/lib/getPollViewModel';
 import type { PollCardProps } from '../model/types';
 import styles from './PollCard.module.css';
+
+const { Text } = Typography;
 
 export function PollCard({
 	poll,
@@ -39,7 +42,10 @@ export function PollCard({
 				</Button>
 			)}
 
-			<span>{votesCount}</span>
+			<Text type='secondary' className={styles.votesCount}>
+				<CheckSquareOutlined className={styles.checkSquareOutlinedIcon} />
+				{votesCount}
+			</Text>
 		</Card>
 	);
 }

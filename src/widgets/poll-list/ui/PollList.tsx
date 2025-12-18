@@ -7,7 +7,6 @@ export function PollList({ polls, userVotes, isLoading }: PollListProps) {
 	return (
 		<Space direction='vertical' size={16} className={styles.list}>
 			{isLoading && <Spin className={styles.spin} />}
-
 			{polls.map((poll) => (
 				<PollVoteCard key={poll.id} poll={poll} userVote={userVotes[poll.id]} />
 			))}

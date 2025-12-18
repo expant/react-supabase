@@ -1,4 +1,5 @@
 import { Button, Flex } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import { PollList } from '@/widgets/poll-list/ui/PollList';
 import { CreatePollButton } from '@/features/poll/create/ui/CreatePollButton';
 import { useFeedPage } from '../model/hooks/useFeedPage';
@@ -12,13 +13,21 @@ export function FeedPage() {
 		<Flex className={styles.feed}>
 			<CreatePollButton onCreated={showNewPolls} />
 
-			{newPollsCount > 0 && (
-				<Button onClick={showNewPolls}>
-					Показать {newPollsCount} новых опросов
-				</Button>
-			)}
-
-			<PollList polls={polls} userVotes={userVotes} isLoading={isLoading} />
+			<Flex className={styles.feedContent}>
+				{newPollsCount > 0 && (
+					<Button
+						type='dashed'
+						size='small'
+						shape='round'
+						icon={<DownOutlined />}
+						onClick={showNewPolls}
+						className={styles.newPollsBtn}
+					>
+						Показать {newPollsCount} новых опросов
+					</Button>
+				)}
+				<PollList polls={polls} userVotes={userVotes} isLoading={isLoading} />
+			</Flex>
 		</Flex>
 	);
 }
