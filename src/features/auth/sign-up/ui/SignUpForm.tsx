@@ -30,6 +30,10 @@ export function SignUpForm() {
 				<Input.Password />
 			</Form.Item>
 
+			<Form.Item label='Username' name='username' rules={[{ required: false }]}>
+				<Input />
+			</Form.Item>
+
 			<Form.Item>
 				<Button type='primary' htmlType='submit' loading={loading} block>
 					Зарегистрироваться

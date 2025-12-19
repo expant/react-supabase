@@ -1,18 +1,18 @@
-import { useNavigate } from 'react-router';
-import { Button } from 'antd';
-import { logout } from '../api/logout';
+import { useNavigate } from "react-router";
+import { Button } from "antd";
+import { logout } from "../api/logout";
 
 export function LoggoutButton() {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const handleLogout = async () => {
-		try {
-			await logout();
-			navigate('/auth');
-		} catch (error) {
-			console.error(error);
-		}
-	};
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/auth");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-	return <Button onClick={handleLogout}>Выйти</Button>;
+  return <Button onClick={handleLogout}>Выйти из учетной записи</Button>;
 }

@@ -1,0 +1,4 @@
+export const ERROR_CODES = {
+  ALREADY_TAKEN: "23505",
+  HAS_WHITESPACE: "23514",
+};
