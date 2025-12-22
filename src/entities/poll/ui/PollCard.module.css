@@ -1,58 +1,333 @@
-.card {
-	width: 100%;
-	text-align: left;
+/* Fallout-inspired color palette (slightly softened) */
+:root {
+  --fallout-dark-green: #050805;
+  --fallout-green: #7cff7c;
+  --fallout-bright-green: #baffba;
+  --fallout-frame-dark: #1a1a1a;
+  --fallout-frame-metal: #2d2d2d;
+  --fallout-shadow: rgba(124, 255, 124, 0.25);
 }
+
+/* Main card container */
+.falloutCard {
+  width: 100%;
+  position: relative;
+  margin: 20px 0;
+}
+
+/* Industrial frame effect */
+.falloutFrame {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--fallout-frame-metal) 0%,
+    var(--fallout-frame-dark) 100%
+  );
+  border: 4px solid var(--fallout-frame-dark);
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 30px var(--fallout-shadow);
+}
+
+/* Frame corner screws */
+.falloutFrame::before,
+.falloutFrame::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--fallout-frame-dark);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--fallout-frame-metal) 30%,
+    var(--fallout-frame-dark) 70%
+  );
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.falloutFrame::before {
+  top: 2px;
+  left: 2px;
+}
+
+.falloutFrame::after {
+  top: 2px;
+  right: 2px;
+}
+
+/* CRT Screen effect */
+.falloutScreen {
+  background: var(--fallout-dark-green);
+  color: var(--fallout-green);
+  padding: 20px;
+  position: relative;
+  border: 2px solid var(--fallout-green);
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1),
+    0 0 10px rgba(0, 255, 65, 0.2);
+
+  /* Scanline effect */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 65, 0.03) 2px,
+    rgba(0, 255, 65, 0.03) 4px
+  );
+
+  /* CRT glow effect (slightly softened) */
+  text-shadow: 0 0 3px var(--fallout-green), 0 0 6px var(--fallout-green);
+}
+
+/* Screen flicker animation */
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.98;
+  }
+}
+
+.falloutScreen {
+  animation: flicker 0.15s infinite;
+}
+
+/* Title styling */
+.falloutTitle {
+  font-family: "Courier New", monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--fallout-bright-green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--fallout-green);
+  text-shadow: 0 0 8px var(--fallout-green), 0 0 12px var(--fallout-green);
+  position: relative;
+}
+
+.falloutTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--fallout-green);
+  box-shadow: 0 0 10px var(--fallout-green);
+}
+
+/* Options container */
 .options {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.card :global(.ant-card-body) {
-	text-align: right;
-}
-
+/* Hide default radio button */
 .options :global(.ant-radio) {
-	position: absolute;
-	width: 0;
-	height: 0;
-	margin: 0;
-	opacity: 0;
-	pointer-events: none;
-}
-
-.options :global(.ant-radio-wrapper) {
-	width: 100%;
-	padding: 10px 12px;
-	border-radius: 6px;
-	border: 1px solid #d9d9d9;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
+  position: absolute;
+  width: 0;
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .options :global(.ant-radio-inner) {
-	display: none;
+  display: none;
 }
 
+/* Fallout-style option boxes */
+.options :global(.ant-radio-wrapper) {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--fallout-green);
+  border-radius: 6px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  color: var(--fallout-green);
+  text-shadow: 0 0 3px var(--fallout-green);
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1),
+    0 0 5px rgba(0, 255, 65, 0.2);
+}
+
+.options :global(.ant-radio-wrapper:hover) {
+  border-color: var(--fallout-bright-green);
+  background: rgba(0, 255, 65, 0.05);
+  box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2),
+    0 0 10px rgba(0, 255, 65, 0.4);
+  color: var(--fallout-bright-green);
+  text-shadow: 0 0 8px var(--fallout-bright-green),
+    0 0 12px var(--fallout-bright-green);
+}
+
+/* Selected option */
 .options :global(.ant-radio-wrapper-checked) {
-	border-color: #d9d9d9;
-	background-color: #e6f4ff;
+  border-color: var(--fallout-bright-green);
+  background: rgba(0, 255, 65, 0.1);
+  color: var(--fallout-bright-green);
+  box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.3),
+    0 0 15px rgba(0, 255, 65, 0.5);
+  text-shadow: 0 0 10px var(--fallout-bright-green),
+    0 0 15px var(--fallout-bright-green);
 }
 
-.options :global(.ant-radio-wrapper:not(.ant-radio-wrapper-disabled):hover) {
-	border-color: #1677ff;
+.options :global(.ant-radio-wrapper-checked::before) {
+  content: "▶";
+  position: absolute;
+  left: 8px;
+  color: var(--fallout-bright-green);
+  text-shadow: 0 0 8px var(--fallout-bright-green);
+  font-size: 12px;
 }
 
+/* Disabled state */
+.options :global(.ant-radio-wrapper-disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: rgba(0, 255, 65, 0.3);
+  color: rgba(0, 255, 65, 0.5);
+}
+
+.options :global(.ant-radio-wrapper-disabled:hover) {
+  border-color: rgba(0, 255, 65, 0.3);
+  background: transparent;
+  box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
+}
+
+/* Cancel button */
 .cancelButton {
-	margin-top: 20px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid var(--fallout-green);
+  color: var(--fallout-green);
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-shadow: 0 0 5px var(--fallout-green);
+  box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1),
+    0 0 5px rgba(0, 255, 65, 0.2);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+.cancelButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 65, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.cancelButton:hover {
+  border-color: var(--fallout-bright-green);
+  color: var(--fallout-bright-green);
+  background: rgba(0, 255, 65, 0.05);
+  box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2),
+    0 0 10px rgba(0, 255, 65, 0.4);
+  text-shadow: 0 0 8px var(--fallout-bright-green),
+    0 0 12px var(--fallout-bright-green);
+}
+
+.cancelButton:hover::before {
+  left: 100%;
+}
+
+.cancelButton:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.3),
+    0 0 5px rgba(0, 255, 65, 0.3);
+}
+
+/* Votes count */
 .votesCount {
-	display: block;
-	margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 20px;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  color: var(--fallout-green);
+  text-shadow: 0 0 5px var(--fallout-green);
 }
 
 .checkSquareOutlinedIcon {
-	margin-right: 5px;
+  margin-right: 8px;
+  color: var(--fallout-green);
+  filter: drop-shadow(0 0 3px var(--fallout-green));
+}
+
+/* Skeleton loader styling */
+.skeleton {
+  background: transparent;
+}
+
+.skeleton :global(.ant-skeleton-content .ant-skeleton-title),
+.skeleton :global(.ant-skeleton-content .ant-skeleton-paragraph > li) {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 65, 0.1) 25%,
+    rgba(0, 255, 65, 0.2) 50%,
+    rgba(0, 255, 65, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Pixelated font effect (optional enhancement) */
+@supports (image-rendering: pixelated) {
+  .falloutScreen {
+    image-rendering: pixelated;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .falloutScreen {
+    padding: 15px;
+  }
+
+  .falloutTitle {
+    font-size: 16px;
+  }
+
+  .options :global(.ant-radio-wrapper) {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
 }
