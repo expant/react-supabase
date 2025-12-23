@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, message } from "antd";
 import { updateUsername } from "@/entities/profile/api/profileApi";
 import { handleError } from "../getErrorMessage";
+import { validateUsernameUpdate } from "@/shared/lib/validateUsername";
 import type {
   UpdateUsernameFormValues,
   UpdateUsernameFormProps,
@@ -19,8 +20,11 @@ export function useUpdateUsername({
     const userId = profile?.id;
 
     if (!userId) return;
-    if (newUsername === profile?.username) {
-      message.error("У вас уже есть этот username");
+
+    const error = validateUsernameUpdate(newUsername, profile.username);
+
+    if (error) {
+      message.error(error);
       return;
     }
 

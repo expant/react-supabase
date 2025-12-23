@@ -24,7 +24,7 @@ export function UpdateUsernameForm({
       <Form.Item
         label="Username"
         name="username"
-        rules={[{ required: true, message: "Пожалуйста, введите username!" }]}
+        rules={[{ required: true, message: "Обязательное поле" }]}
       >
         <Input placeholder={profile?.username} disabled={isLoading} />
       </Form.Item>
