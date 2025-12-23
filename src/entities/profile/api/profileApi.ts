@@ -25,3 +25,13 @@ export async function updateUsername(userId: string, username: string) {
     throw error;
   }
 }
+
+export async function deleteAccount(userId: string) {
+  const { error } = await supabase.from("profiles").delete().eq("id", userId);
+
+  if (error) {
+    throw error;
+  }
+
+  await supabase.auth.signOut({ scope: "local" });
+}
