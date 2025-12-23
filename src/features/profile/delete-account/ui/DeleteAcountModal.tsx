@@ -14,9 +14,9 @@ export function DeleteAccountModal({
       open={isOpen}
       onCancel={onClose}
       onOk={onDelete}
-      okText="Удалить"
+      okText="Да"
       okButtonProps={{ danger: true }}
-      cancelText="Отменить"
+      cancelText="Нет"
       loading={isLoading}
     >
       <Text>Вы действительно хотите удалить аккаунт?</Text>
