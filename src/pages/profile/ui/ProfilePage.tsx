@@ -1,24 +1,32 @@
-import { Card, Space } from "antd";
-import { LoggoutButton } from "@/features/auth/logout/ui/LogoutButton";
-import { DeleteAccountControl } from "@/features/profile/delete-account/ui/DeleteAccountControl";
-import { UpdateUsernameForm } from "@/features/profile/update-username/ui/UpdateUsernameForm";
-import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
+import { useState } from "react";
+import type { ReactNode } from "react";
+import { Layout, Menu, Empty } from "antd";
+import { ProfileSettings } from "@/widgets/profile/settings/ui/ProfileSettings";
 import styles from "./ProfilePage.module.css";
 
+const { Sider, Content } = Layout;
+
 export function ProfilePage() {
-  const { profile, setUsername, isLoading } = useProfile();
+  const [currentMenuKey, setCurrentMenuKey] = useState("settings");
+
+  const contentMap: Record<string, ReactNode> = {
+    settings: <ProfileSettings />,
+  };
 
   return (
-    <Card
-      title="Настройки профиля"
-      loading={isLoading}
-      className={styles.profileCard}
-    >
-      <UpdateUsernameForm profile={profile} setUsername={setUsername} />
-      <Space direction="vertical">
-        <LoggoutButton />
-        <DeleteAccountControl />
-      </Space>
-    </Card>
+    <Layout className={styles.layout}>
+      <Sider className={styles.sider} theme="light">
+        <Menu
+          mode="inline"
+          selectedKeys={[currentMenuKey]}
+          onClick={({ key }) => setCurrentMenuKey(key)}
+          items={[{ key: "settings", label: "Настройки" }]}
+        ></Menu>
+      </Sider>
+
+      <Content>
+        {contentMap[currentMenuKey] || <Empty description="Нет данных" />}
+      </Content>
+    </Layout>
   );
 }
