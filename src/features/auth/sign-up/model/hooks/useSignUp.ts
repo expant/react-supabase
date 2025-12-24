@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { message } from "antd";
 import { signUp } from "../../api/signUp";
 import { validateUsernameCreate } from "@/shared/lib/validateUsername";
+import { getErrorMessage } from "../signUpErrors";
 import type { SignUpFormValues } from "../types";
 
 export function useSignUp() {
@@ -22,12 +23,8 @@ export function useSignUp() {
       setLoading(true);
       await signUp({ ...values, username });
       navigate("/feed", { replace: true });
-    } catch (error) {
-      console.log(error);
-
-      message.error(
-        error instanceof Error ? error.message : "Ошибка регистрации"
-      );
+    } catch (e) {
+      message.error(getErrorMessage(e as Error));
     } finally {
       setLoading(false);
     }

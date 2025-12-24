@@ -11,13 +11,14 @@ export function DeleteAccountModal({
 }: DeleteAccountModalProps) {
   return (
     <Modal
+      centered
+      okText="Да"
+      cancelText="Нет"
+      loading={isLoading}
       open={isOpen}
       onCancel={onClose}
       onOk={onDelete}
-      okText="Да"
       okButtonProps={{ danger: true }}
-      cancelText="Нет"
-      loading={isLoading}
     >
       <Text>Вы действительно хотите удалить аккаунт?</Text>
     </Modal>

@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { DeleteAccountModal } from "./DeleteAcountModal";
-import { useDeleteAccountModal } from "../model/hooks/useDeleteAccountModal";
 import { useDeleteAccount } from "../model/hooks/useDeleteAccount";
+import { useDeleteAccountModal } from "../model/hooks/useDeleteAccountModal";
 
 export function DeleteAccountControl() {
   const { isLoading, handleDelete } = useDeleteAccount();
