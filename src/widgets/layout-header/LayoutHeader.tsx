@@ -1,6 +1,7 @@
 import { Link } from "react-router";
-import { Layout, Typography } from "antd";
+import { Layout, Typography, Flex } from "antd";
 import { UserPanel } from "@/widgets/user-panel/ui/UserPanel";
+import { NavigationPanel } from "../navigation-panel/ui/NavigationPanel";
 import styles from "./LayoutHeader.module.css";
 
 const { Header } = Layout;
@@ -12,7 +13,11 @@ export function LayoutHeader() {
       <Title level={2} className={styles.title}>
         <Link to={"/"}>Опросы</Link>
       </Title>
-      <UserPanel />
+
+      <Flex className={styles.right}>
+        <NavigationPanel />
+        <UserPanel />
+      </Flex>
     </Header>
   );
 }

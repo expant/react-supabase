@@ -25,18 +25,21 @@ export function subscribeToNewPolls(onInserted: OnPollInserted) {
 }
 
 export function subscribeToPollVotesCount(onUpdated: onPollVotesCountUpdated) {
-  const channel = supabase.channel("polls:update:votes_count").on(
-    "postgres_changes",
-    {
-      event: "UPDATE",
-      schema: "public",
-      table: "polls",
-    },
-    (payload) => {
-      const next = payload.new as PollRow;
-      onUpdated({ id: next.id, votes_count: next.votes_count });
-    }
-  );
+  const channel = supabase
+    .channel("polls:update:votes_count")
+    .on(
+      "postgres_changes",
+      {
+        event: "UPDATE",
+        schema: "public",
+        table: "polls",
+      },
+      (payload) => {
+        const next = payload.new as PollRow;
+        onUpdated({ id: next.id, votes_count: next.votes_count });
+      }
+    )
+    .subscribe();
 
   return () => {
     supabase.removeChannel(channel);

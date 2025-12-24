@@ -1,7 +1,12 @@
 .header {
-	display: flex;
-	justify-content: space-between;
-	height: auto;
-	line-height: normal;
-	background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  line-height: normal;
+  background-color: #fff;
+}
+
+.right {
+  align-items: center;
+  gap: 30px;
 }

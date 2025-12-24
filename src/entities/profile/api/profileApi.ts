@@ -35,3 +35,21 @@ export async function deleteAccount(userId: string) {
 
   await supabase.auth.signOut({ scope: "local" });
 }
+
+export function getAvatarUrl(userId: string, ext = "png") {
+  return supabase.storage.from("avatars").getPublicUrl(`${userId}.${ext}`).data
+    .publicUrl;
+}
+
+export async function uploadAvatar(userId: string, file: File) {
+  const fileExt = file.name.split(".").pop();
+  const filePath = `${userId}.${fileExt}`;
+
+  const { error } = await supabase.storage
+    .from("avatars")
+    .upload(filePath, file, { upsert: true, contentType: file.type });
+
+  if (error) {
+    throw error;
+  }
+}
