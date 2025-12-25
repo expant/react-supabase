@@ -4,7 +4,7 @@ import type { Profile } from "../model/types";
 export async function getProfile(userId: string) {
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, username")
+    .select("id, username, avatar_updated_at")
     .eq("id", userId)
     .single();
 
@@ -39,6 +39,17 @@ export async function deleteAccount(userId: string) {
 export function getAvatarUrl(userId: string, ext = "png") {
   return supabase.storage.from("avatars").getPublicUrl(`${userId}.${ext}`).data
     .publicUrl;
+}
+
+export async function updateAvatarUpdatedAt(userId: string) {
+  const { error } = await supabase
+    .from("profiles")
+    .update({ avatar_updated_at: new Date().toISOString() })
+    .eq("id", userId);
+
+  if (error) {
+    throw error;
+  }
 }
 
 export async function uploadAvatar(userId: string, file: File) {

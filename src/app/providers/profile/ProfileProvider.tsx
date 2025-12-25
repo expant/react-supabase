@@ -15,7 +15,6 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     (async () => {
       try {
         setIsLoading(true);
-
         const data = await getProfile(user.id);
 
         if (isMounted) setProfile(data);
@@ -29,12 +28,28 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     };
   }, [user.id]);
 
+  const refetchProfile = async () => {
+    if (!user.id) return;
+
+    setIsLoading(true);
+    try {
+      const data = await getProfile(user.id);
+      setProfile(data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const setUsername = (username: string) => {
     setProfile((prev) => (prev ? { ...prev, username } : prev));
   };
 
   return (
-    <ProfileContext.Provider value={{ profile, isLoading, setUsername }}>
+    <ProfileContext.Provider
+      value={{ profile, isLoading, setUsername, refetchProfile }}
+    >
       {children}
     </ProfileContext.Provider>
   );
