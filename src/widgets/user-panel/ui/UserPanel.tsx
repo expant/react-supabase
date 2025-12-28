@@ -19,7 +19,7 @@ export function UserPanel() {
       <Avatar
         shape="circle"
         icon={<UserOutlined />}
-        src={getAvatarUrl(profile.id)}
+        src={getAvatarUrl(profile.id, profile.avatar_updated_at)}
       />
     </Flex>
   );

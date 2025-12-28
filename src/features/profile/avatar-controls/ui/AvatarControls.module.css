@@ -1,0 +1,27 @@
+.avatarContainer {
+  position: relative;
+  width: fit-content;
+}
+
+.dropdownRenderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.dropdownRenderContainer button {
+  display: flex;
+  justify-content: flex-start;
+  border: none;
+}
+
+.cameraButton {
+  position: absolute;
+  right: -5px;
+  top: 4px;
+  border-radius: 50%;
+}

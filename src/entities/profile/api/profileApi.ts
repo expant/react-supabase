@@ -36,9 +36,12 @@ export async function deleteAccount(userId: string) {
   await supabase.auth.signOut({ scope: "local" });
 }
 
-export function getAvatarUrl(userId: string, ext = "png") {
-  return supabase.storage.from("avatars").getPublicUrl(`${userId}.${ext}`).data
-    .publicUrl;
+export function getAvatarUrl(userId: string, updatedAt: string | null) {
+  if (!updatedAt) return null;
+
+  const { data } = supabase.storage.from("avatars").getPublicUrl(userId);
+
+  return `${data.publicUrl}?v=${new Date(updatedAt).getTime()}`;
 }
 
 export async function updateAvatarUpdatedAt(userId: string) {
@@ -53,12 +56,13 @@ export async function updateAvatarUpdatedAt(userId: string) {
 }
 
 export async function uploadAvatar(userId: string, file: File) {
-  const fileExt = file.name.split(".").pop();
-  const filePath = `${userId}.${fileExt}`;
-
   const { error } = await supabase.storage
     .from("avatars")
-    .upload(filePath, file, { upsert: true, contentType: file.type });
+    .upload(userId, file, {
+      upsert: true,
+      contentType: file.type,
+      cacheControl: "3600",
+    });
 
   if (error) {
     throw error;

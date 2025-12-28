@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { message } from "antd";
 import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
 import {
   uploadAvatar,
   updateAvatarUpdatedAt,
 } from "@/entities/profile/api/profileApi";
+import { getAvatarUrl } from "@/entities/profile/api/profileApi";
 import type { UploadProps } from "antd/es/upload";
 
-export function useUploadAvatar() {
-  // const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+export function useAvatar() {
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { profile, refetchProfile } = useProfile();
 
-  // useEffect(() => {
-  //   if (profile) setAvatarUrl(getAvatarUrl(profile.id));
-  // }, [profile]);
+  useEffect(() => {
+    if (!profile) return;
+
+    const { id, avatar_updated_at } = profile;
+    const url = getAvatarUrl(id, avatar_updated_at);
+
+    setAvatarUrl(url);
+  }, [profile]);
 
   const handleBeforeUpload = () => {};
 
