@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  gap: 40px;
+}
+
+.avatarContainer {
+  flex-shrink: 0;
+}
+
+.rightContainer {
+  flex: 1;
+}
+
+.buttonsContainer {
+  justify-content: space-between;
+  width: 100%;
+}

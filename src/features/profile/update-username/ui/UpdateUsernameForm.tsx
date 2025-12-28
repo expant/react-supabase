@@ -1,4 +1,4 @@
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input, Flex } from "antd";
 import { useUpdateUsername } from "../model/hooks/useUpdateUsername";
 import type {
   UpdateUsernameFormValues,
@@ -19,19 +19,23 @@ export function UpdateUsernameForm({
     <Form<UpdateUsernameFormValues>
       form={form}
       onFinish={handleSubmit}
+      layout="vertical"
       className={styles.form}
     >
       <Form.Item
-        label="Username"
+        label="Имя пользователя"
         name="username"
-        rules={[{ required: true, message: "Обязательное поле" }]}
+        colon={false}
+        className={styles.formItem}
       >
-        <Input placeholder={profile?.username} disabled={isLoading} />
-      </Form.Item>
+        <Flex gap="small" className={styles.inputContainer}>
+          <Input placeholder={profile?.username} disabled={isLoading} />
 
-      <Button type="primary" htmlType="submit" loading={isLoading}>
-        Изменить
-      </Button>
+          <Button type="primary" htmlType="submit" loading={isLoading}>
+            Изменить
+          </Button>
+        </Flex>
+      </Form.Item>
     </Form>
   );
 }

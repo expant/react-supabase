@@ -14,5 +14,5 @@ export function LoggoutButton() {
     }
   };
 
-  return <Button onClick={handleLogout}>Выйти из учетной записи</Button>;
+  return <Button onClick={handleLogout}>Выйти из аккаунта</Button>;
 }

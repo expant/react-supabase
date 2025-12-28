@@ -1,4 +1,7 @@
 .form {
-  display: flex;
-  gap: 10px;
+  width: 100%;
+}
+
+.formItem :global(.ant-form-item-label > label) {
+  font-weight: 600;
 }
