@@ -1,33 +1,39 @@
+import type { Author } from "@/entities/profile/model/types";
+
 export type PollOption = {
-	id: number;
-	text: string;
-	position: number;
+  id: number;
+  text: string;
+  position: number;
 };
 
 // TODO: Сделать через supabase Database тип
 export type PollRow = {
-	id: number;
-	question: string;
-	is_anonymous: boolean;
-	created_at: string;
-	author_id: string;
-	votes_count: number;
+  id: number;
+  question: string;
+  is_anonymous: boolean;
+  created_at: string;
+  author_id: string;
+  votes_count: number;
+};
+
+export type PollWithAuthor = PollRow & {
+  author: Author;
 };
 
 export type Poll = PollRow & {
-	poll_options: PollOption[];
+  poll_options: PollOption[];
 };
 
 export type PollCardProps = {
-	poll: Poll;
-	optionId: number | null;
-	disabled?: boolean;
-	isLoading: boolean;
-	onChange: (optionId: number) => void;
-	onCancel: () => void;
+  poll: Poll;
+  optionId: number | null;
+  disabled?: boolean;
+  isLoading: boolean;
+  onChange: (optionId: number) => void;
+  onCancel: () => void;
 };
 
 export type OnPollInserted = (pollRow: PollRow) => void;
 export type onPollVotesCountUpdated = (
-	data: Pick<PollRow, 'id' | 'votes_count'>
+  data: Pick<PollRow, "id" | "votes_count">
 ) => void;

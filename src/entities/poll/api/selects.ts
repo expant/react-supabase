@@ -9,5 +9,9 @@ export const POLL_WITH_OPTIONS_SELECT = `
     id,
     text,
     position
+  ),
+  author:profiles!polls_author_id_fkey(
+    username,
+    avatar_updated_at
   )
 `;
