@@ -16,7 +16,6 @@
 .dropdownRenderContainer button {
   display: flex;
   justify-content: flex-start;
-  border: none;
 }
 
 .cameraButton {

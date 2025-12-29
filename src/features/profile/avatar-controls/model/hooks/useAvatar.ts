@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
-import { message } from "antd";
-import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
+import { message, Upload } from "antd";
 import {
+  deleteAvatar,
   uploadAvatar,
-  updateAvatarUpdatedAt,
-} from "@/entities/profile/api/profileApi";
-import { getAvatarUrl } from "@/entities/profile/api/profileApi";
+  getAvatarUrl,
+} from "@/entities/profile/api/avatarApi";
 import type { UploadProps } from "antd/es/upload";
+import type { UseAvatarArgs } from "../types";
 
-export function useAvatar() {
+const AVATAR_TYPES = ["image/jpeg", "image/png", "image/webp"];
+
+export function useAvatar({ profile, refetchProfile }: UseAvatarArgs) {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { profile, refetchProfile } = useProfile();
 
   useEffect(() => {
     if (!profile) return;
@@ -22,18 +23,13 @@ export function useAvatar() {
     setAvatarUrl(url);
   }, [profile]);
 
-  const handleBeforeUpload = () => {};
-
-  const handleUpload: UploadProps["onChange"] = async (info) => {
-    const file = info.file.originFileObj;
-
-    if (!file || !profile) return;
+  const handleUpload = async (file: File) => {
+    if (!profile) return;
 
     setIsLoading(true);
 
     try {
       await uploadAvatar(profile.id, file);
-      await updateAvatarUpdatedAt(profile.id);
       await refetchProfile();
     } catch (e) {
       message.error(e instanceof Error ? e.message : "Ошибка загрузки аватара");
@@ -42,5 +38,36 @@ export function useAvatar() {
     }
   };
 
-  return { avatarUrl, isLoading, handleUpload, handleBeforeUpload };
+  const handleBeforeUpload: UploadProps["beforeUpload"] = async (file) => {
+    if (!AVATAR_TYPES.includes(file.type)) {
+      message.error("Недопустимый тип файла. Допустимые типы: jpeg, png, webp");
+      return Upload.LIST_IGNORE;
+    }
+
+    await handleUpload(file);
+    return false;
+  };
+
+  const handleDeleteAvatar = async () => {
+    if (!profile) return;
+
+    setIsLoading(true);
+
+    try {
+      await deleteAvatar(profile.id);
+      await refetchProfile();
+    } catch (e) {
+      message.error(e instanceof Error ? e.message : "Ошибка удаления аватара");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    avatarUrl,
+    isLoading,
+    handleUpload,
+    handleBeforeUpload,
+    handleDeleteAvatar,
+  };
 }

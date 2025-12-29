@@ -7,13 +7,13 @@ import { AvatarControls } from "@/features/profile/avatar-controls/ui/AvatarCont
 import styles from "./ProfileSettings.module.css";
 
 export function ProfileSettings() {
-  const { profile, isLoading, setUsername } = useProfile();
+  const { profile, isLoading, setUsername, refetchProfile } = useProfile();
 
   return (
     <Card title="Настройки профиля" loading={isLoading}>
       <Flex gap="large" className={styles.container}>
         <Flex className={styles.avatarContainer}>
-          <AvatarControls />
+          <AvatarControls profile={profile} refetchProfile={refetchProfile} />
         </Flex>
 
         <Flex vertical gap="middle" className={styles.rightContainer}>
