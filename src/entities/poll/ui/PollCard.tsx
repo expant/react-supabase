@@ -14,23 +14,29 @@ export function PollCard({
   onChange,
   onCancel,
 }: PollCardProps) {
-  const { author, options, question, votesCount, avatarUrl, handleChange } =
-    getPollViewModel(poll, onChange);
+  const {
+    author,
+    options,
+    question,
+    votesCount,
+    createdAt,
+    avatarUrl,
+    handleChange,
+  } = getPollViewModel(poll, onChange);
 
   const cardTitle = () => (
     <div className={styles.title}>
-      <Flex className={styles.author}>
-        {author ? (
-          <>
-            <Avatar shape="circle" src={avatarUrl} icon={<UserOutlined />} />
-            <Text>{author.username}</Text>
-          </>
-        ) : (
-          <>
-            <Avatar shape="circle" icon={<UserOutlined />} />
-            <Text type="secondary">User Deleted</Text>
-          </>
-        )}
+      <Flex className={styles.info}>
+        <Avatar
+          shape="circle"
+          src={avatarUrl}
+          icon={<UserOutlined />}
+          size={40}
+        />
+        <Flex className={styles.infoText}>
+          <Text>{author ? author.username : "User Deleted"}</Text>
+          <Text type="secondary">{createdAt}</Text>
+        </Flex>
       </Flex>
 
       <Text className={styles.question}>{question}</Text>

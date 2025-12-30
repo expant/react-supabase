@@ -66,8 +66,12 @@
   margin-right: 5px;
 }
 
-.author {
+.info {
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+}
+
+.infoText {
+  flex-direction: column;
 }
