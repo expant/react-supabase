@@ -1,5 +1,5 @@
-import { useAuth } from './useAuth';
+import { useAuth } from "./useAuth";
 
 export function useUser() {
-	return useAuth().session!.user;
+  return useAuth().session!.user;
 }

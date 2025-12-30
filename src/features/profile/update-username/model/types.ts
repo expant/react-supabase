@@ -7,4 +7,6 @@ export type UpdateUsernameFormProps = {
   setUsername: (username: string) => void;
 };
 
+export type UseUpdateUsernameFormArgs = UpdateUsernameFormProps;
+
 export type ErrorWithCode = { code?: string };

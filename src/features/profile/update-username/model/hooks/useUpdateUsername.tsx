@@ -5,13 +5,13 @@ import { handleError } from "../getErrorMessage";
 import { validateUsernameUpdate } from "@/shared/lib/validateUsername";
 import type {
   UpdateUsernameFormValues,
-  UpdateUsernameFormProps,
+  UseUpdateUsernameFormArgs,
 } from "../types";
 
 export function useUpdateUsername({
   profile,
   setUsername,
-}: UpdateUsernameFormProps) {
+}: UseUpdateUsernameFormArgs) {
   const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm<UpdateUsernameFormValues>();
 
