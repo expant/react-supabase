@@ -1,5 +1,5 @@
-import { Button, Card, Radio, Skeleton, Typography } from "antd";
-import { CheckSquareOutlined } from "@ant-design/icons";
+import { Button, Card, Radio, Skeleton, Typography, Avatar, Flex } from "antd";
+import { CheckSquareOutlined, UserOutlined } from "@ant-design/icons";
 import { getPollViewModel } from "../model/lib/getPollViewModel";
 import type { PollCardProps } from "../model/types";
 import styles from "./PollCard.module.css";
@@ -14,8 +14,28 @@ export function PollCard({
   onChange,
   onCancel,
 }: PollCardProps) {
-  const { author, options, question, votesCount, handleChange } =
+  const { author, options, question, votesCount, avatarUrl, handleChange } =
     getPollViewModel(poll, onChange);
+
+  const cardTitle = () => (
+    <div className={styles.title}>
+      <Flex className={styles.author}>
+        {author ? (
+          <>
+            <Avatar shape="circle" src={avatarUrl} icon={<UserOutlined />} />
+            <Text>{author.username}</Text>
+          </>
+        ) : (
+          <>
+            <Avatar shape="circle" icon={<UserOutlined />} />
+            <Text type="secondary">User Deleted</Text>
+          </>
+        )}
+      </Flex>
+
+      <Text className={styles.question}>{question}</Text>
+    </div>
+  );
 
   if (isLoading)
     return (
@@ -25,7 +45,7 @@ export function PollCard({
     );
 
   return (
-    <Card title={question} className={styles.card}>
+    <Card title={cardTitle()} className={styles.card}>
       <Radio.Group
         value={optionId}
         options={options}
@@ -42,12 +62,8 @@ export function PollCard({
 
       <Text type="secondary" className={styles.votesCount}>
         <CheckSquareOutlined className={styles.checkSquareOutlinedIcon} />
+
         {votesCount}
-        {author ? (
-          <Text>{author.username}</Text>
-        ) : (
-          <Text type="secondary">User Deleted</Text>
-        )}
       </Text>
     </Card>
   );
