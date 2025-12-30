@@ -1,4 +1,4 @@
-export const POLL_WITH_OPTIONS_SELECT = `
+export const POLL_SELECT = `
   id,
   question,
   is_anonymous,
@@ -10,7 +10,7 @@ export const POLL_WITH_OPTIONS_SELECT = `
     text,
     position
   ),
-  author:profiles!polls_author_id_fkey(
+  author:profiles!polls_author_id_fkey1(
     username,
     avatar_updated_at
   )

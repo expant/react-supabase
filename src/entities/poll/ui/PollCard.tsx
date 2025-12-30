@@ -1,51 +1,54 @@
-import { Button, Card, Radio, Skeleton, Typography } from 'antd';
-import { CheckSquareOutlined } from '@ant-design/icons';
-import { getPollViewModel } from '../model/lib/getPollViewModel';
-import type { PollCardProps } from '../model/types';
-import styles from './PollCard.module.css';
+import { Button, Card, Radio, Skeleton, Typography } from "antd";
+import { CheckSquareOutlined } from "@ant-design/icons";
+import { getPollViewModel } from "../model/lib/getPollViewModel";
+import type { PollCardProps } from "../model/types";
+import styles from "./PollCard.module.css";
 
 const { Text } = Typography;
 
 export function PollCard({
-	poll,
-	optionId,
-	disabled,
-	isLoading,
-	onChange,
-	onCancel,
+  poll,
+  optionId,
+  disabled,
+  isLoading,
+  onChange,
+  onCancel,
 }: PollCardProps) {
-	const { question, options, votesCount, handleChange } = getPollViewModel(
-		poll,
-		onChange
-	);
+  const { author, options, question, votesCount, handleChange } =
+    getPollViewModel(poll, onChange);
 
-	if (isLoading)
-		return (
-			<Card title={question} className={styles.card}>
-				<Skeleton active />
-			</Card>
-		);
+  if (isLoading)
+    return (
+      <Card title={question} className={styles.card}>
+        <Skeleton active />
+      </Card>
+    );
 
-	return (
-		<Card title={question} className={styles.card}>
-			<Radio.Group
-				value={optionId}
-				options={options}
-				onChange={handleChange}
-				disabled={disabled}
-				className={styles.options}
-			/>
+  return (
+    <Card title={question} className={styles.card}>
+      <Radio.Group
+        value={optionId}
+        options={options}
+        onChange={handleChange}
+        disabled={disabled}
+        className={styles.options}
+      />
 
-			{disabled && (
-				<Button onClick={onCancel} className={styles.cancelButton}>
-					Отменить голос
-				</Button>
-			)}
+      {disabled && (
+        <Button onClick={onCancel} className={styles.cancelButton}>
+          Отменить голос
+        </Button>
+      )}
 
-			<Text type='secondary' className={styles.votesCount}>
-				<CheckSquareOutlined className={styles.checkSquareOutlinedIcon} />
-				{votesCount}
-			</Text>
-		</Card>
-	);
+      <Text type="secondary" className={styles.votesCount}>
+        <CheckSquareOutlined className={styles.checkSquareOutlinedIcon} />
+        {votesCount}
+        {author ? (
+          <Text>{author.username}</Text>
+        ) : (
+          <Text type="secondary">User Deleted</Text>
+        )}
+      </Text>
+    </Card>
+  );
 }

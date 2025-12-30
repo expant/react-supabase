@@ -6,21 +6,17 @@ export type PollOption = {
   position: number;
 };
 
-// TODO: Сделать через supabase Database тип
 export type PollRow = {
   id: number;
   question: string;
   is_anonymous: boolean;
   created_at: string;
-  author_id: string;
+  author_id: string | null;
   votes_count: number;
 };
 
-export type PollWithAuthor = PollRow & {
-  author: Author;
-};
-
 export type Poll = PollRow & {
+  author: Author | null;
   poll_options: PollOption[];
 };
 
