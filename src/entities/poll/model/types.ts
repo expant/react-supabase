@@ -29,6 +29,10 @@ export type PollCardProps = {
   onCancel: () => void;
 };
 
+export type UserPollCardProps = {
+  poll: Poll;
+};
+
 export type OnPollInserted = (pollRow: PollRow) => void;
 export type onPollVotesCountUpdated = (
   data: Pick<PollRow, "id" | "votes_count">

@@ -1,14 +1,18 @@
 .card {
-  width: 100%;
+  width: 500px;
   text-align: left;
 }
 
 .title {
+  width: 100%;
   padding: 20px 0 10px 0;
 }
 
 .question {
+  display: block;
   font-size: 18px;
+  white-space: pre-wrap;
+  hyphens: auto;
 }
 
 .options {
