@@ -1,12 +1,34 @@
-import { Typography } from "antd";
-import { PollList } from "@/widgets/poll-list/ui/PollList";
+import { Empty, Space, Spin, Typography } from "antd";
+import { UserPollCard } from "@/entities/poll/ui/UserPollCard";
+import { useUserPolls } from "../model/hooks/useUserPolls";
+import styles from "./UserPolls.module.css";
 
 const { Title } = Typography;
 
-export function UserPolls () {
+export function UserPolls() {
+  const { polls, isLoading } = useUserPolls();
+
   return (
-    <div>
-      <Title level={3}>Мои опросы</Title>
+    <div className={styles.root}>
+      <Title level={3} className={styles.title}>
+        Мои опросы
+      </Title>
+
+      <div className={styles.content}>
+        {isLoading ? (
+          <div className={styles.loading}>
+            <Spin />
+          </div>
+        ) : polls.length === 0 ? (
+          <Empty description="У вас пока нет опросов" />
+        ) : (
+          <Space orientation="vertical" size={16} className={styles.list}>
+            {polls.map((poll) => (
+              <UserPollCard key={poll.id} poll={poll} />
+            ))}
+          </Space>
+        )}
+      </div>
     </div>
   );
 }
