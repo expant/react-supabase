@@ -1,12 +1,13 @@
 import { Empty, Space, Spin, Typography } from "antd";
 import { UserPollCard } from "@/entities/poll/ui/UserPollCard";
+import { DeletePollButton } from "@/features/poll/delete/ui/DeletePollButton";
 import { useUserPolls } from "../model/hooks/useUserPolls";
 import styles from "./UserPolls.module.css";
 
 const { Title } = Typography;
 
 export function UserPolls() {
-  const { polls, isLoading } = useUserPolls();
+  const { polls, isLoading, loadUserPolls } = useUserPolls();
 
   return (
     <div className={styles.root}>
@@ -24,7 +25,13 @@ export function UserPolls() {
         ) : (
           <Space orientation="vertical" size={16} className={styles.list}>
             {polls.map((poll) => (
-              <UserPollCard key={poll.id} poll={poll} />
+              <UserPollCard
+                key={poll.id}
+                poll={poll}
+                actionSlot={
+                  <DeletePollButton pollId={poll.id} onDeleted={loadUserPolls} />
+                }
+              />
             ))}
           </Space>
         )}

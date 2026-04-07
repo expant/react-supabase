@@ -1,4 +1,5 @@
 import type { Author } from "@/entities/profile/model/types";
+import type { ReactNode } from "react";
 
 export type PollOption = {
   id: number;
@@ -31,6 +32,7 @@ export type PollCardProps = {
 
 export type UserPollCardProps = {
   poll: Poll;
+  actionSlot?: ReactNode;
 };
 
 export type OnPollInserted = (pollRow: PollRow) => void;
