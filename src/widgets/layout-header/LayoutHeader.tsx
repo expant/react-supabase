@@ -5,19 +5,26 @@ import { NavigationPanel } from "../navigation-panel/ui/NavigationPanel";
 import styles from "./LayoutHeader.module.css";
 
 const { Header } = Layout;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export function LayoutHeader() {
   return (
     <Header className={styles.header}>
-      <Title level={2} className={styles.title}>
-        <Link to={"/"}>Опросы</Link>
-      </Title>
+      <div className={styles.inner}>
+        <Link to={"/"} className={styles.brand}>
+          <Title level={3} className={styles.brandTitle}>
+            PollFeed
+          </Title>
+          <Text type="secondary" className={styles.brandSubtitle}>
+            create • vote • share
+          </Text>
+        </Link>
 
-      <Flex className={styles.right}>
-        <NavigationPanel />
-        <UserPanel />
-      </Flex>
+        <Flex className={styles.right}>
+          <NavigationPanel />
+          <UserPanel />
+        </Flex>
+      </div>
     </Header>
   );
 }

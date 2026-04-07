@@ -13,7 +13,9 @@ export function MainLayout() {
       <Layout className={styles.layout}>
         <LayoutHeader />
         <Content className={styles.content}>
-          <Outlet />
+          <div className={styles.container}>
+            <Outlet />
+          </div>
         </Content>
         <LayoutFooter />
       </Layout>
