@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { Layout, Menu, Empty } from "antd";
+import { UserPolls } from "@/widgets/user-polls/ui/UserPolls";
 import { ProfileSettings } from "@/widgets/profile/settings/ui/ProfileSettings";
 import styles from "./ProfilePage.module.css";
 
@@ -11,6 +12,7 @@ export function ProfilePage() {
 
   const contentMap: Record<string, ReactNode> = {
     settings: <ProfileSettings />,
+    userPolls: <UserPolls />,
   };
 
   return (
@@ -20,7 +22,7 @@ export function ProfilePage() {
           mode="inline"
           selectedKeys={[currentMenuKey]}
           onClick={({ key }) => setCurrentMenuKey(key)}
-          items={[{ key: "settings", label: "Настройки" }]}
+          items={[{ key: "settings", label: "Настройки" }, { key: "userPolls", label: "Мои опросы" }]}
         ></Menu>
       </Sider>
 
