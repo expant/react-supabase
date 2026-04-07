@@ -1,5 +1,5 @@
 import { Button, Card, Radio, Skeleton, Typography, Avatar, Flex } from "antd";
-import { CheckSquareOutlined, UserOutlined } from "@ant-design/icons";
+import { CheckSquareOutlined, UserOutlined, CloseOutlined } from "@ant-design/icons";
 import { getPollViewModel } from "../model/lib/getPollViewModel";
 import type { PollCardProps } from "../model/types";
 import styles from "./PollCard.module.css";
@@ -23,6 +23,12 @@ export function PollCard({
     avatarUrl,
     handleChange,
   } = getPollViewModel(poll, onChange);
+
+  const handleOnCancel = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onCancel();
+  };
 
   const cardTitle = () => (
     <div className={styles.title}>
@@ -54,17 +60,29 @@ export function PollCard({
     <Card title={cardTitle()} className={styles.card}>
       <Radio.Group
         value={optionId}
-        options={options}
         onChange={handleChange}
         disabled={disabled}
         className={styles.options}
-      />
+      >
+        {options.map((opt) => (
+          <Radio key={opt.id} value={opt.id} className={styles.optionRadio}>
+            <div className={styles.optionRow}>
+              <div className={styles.optionText}>{opt.text}</div>
 
-      {disabled && (
-        <Button onClick={onCancel} className={styles.cancelButton}>
-          Отменить голос
-        </Button>
-      )}
+              {disabled && optionId === opt.id && (
+                <Button
+                  type="text"
+                  size="small"
+                  icon={<CloseOutlined />}
+                  className={styles.cancelIcon}
+                  aria-label="Отменить голос"
+                  onClick={handleOnCancel}
+                />
+              )}
+            </div>
+          </Radio>
+        ))}
+      </Radio.Group>
 
       <Text type="secondary" className={styles.votesCount}>
         <CheckSquareOutlined className={styles.checkSquareOutlinedIcon} />
