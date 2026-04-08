@@ -5,6 +5,11 @@
 
 .content {
   padding: 20px;
+  flex: 1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .container {

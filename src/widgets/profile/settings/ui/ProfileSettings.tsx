@@ -4,6 +4,7 @@ import { DeleteAccountControl } from "@/features/profile/delete-account/ui/Delet
 import { UpdateUsernameForm } from "@/features/profile/update-username/ui/UpdateUsernameForm";
 import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
 import { AvatarControls } from "@/features/profile/avatar-controls/ui/AvatarControls";
+import { BackgroundControls } from "@/features/profile/background-controls/ui/BackgroundControls";
 import styles from "./ProfileSettings.module.css";
 
 export function ProfileSettings() {
@@ -18,6 +19,8 @@ export function ProfileSettings() {
 
         <Flex vertical gap="middle" className={styles.rightContainer}>
           <UpdateUsernameForm profile={profile} setUsername={setUsername} />
+
+          <BackgroundControls profile={profile} />
 
           <Flex className={styles.buttonsContainer}>
             <LoggoutButton />
