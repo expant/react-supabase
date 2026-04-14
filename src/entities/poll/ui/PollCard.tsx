@@ -1,5 +1,18 @@
-import { Button, Card, Radio, Skeleton, Typography, Avatar, Flex } from "antd";
-import { CheckSquareOutlined, UserOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Card,
+  Radio,
+  Skeleton,
+  Typography,
+  Avatar,
+  Flex,
+  Progress,
+} from "antd";
+import {
+  CheckSquareOutlined,
+  UserOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import { getPollViewModel } from "../model/lib/getPollViewModel";
 import type { PollCardProps } from "../model/types";
 import styles from "./PollCard.module.css";
@@ -67,7 +80,22 @@ export function PollCard({
         {options.map((opt) => (
           <Radio key={opt.id} value={opt.id} className={styles.optionRadio}>
             <div className={styles.optionRow}>
-              <div className={styles.optionText}>{opt.text}</div>
+              <div className={styles.optionContent}>
+                <div className={styles.optionText}>{opt.text}</div>
+                {disabled && (
+                  <div className={styles.optionResult}>
+                    <Progress
+                      percent={opt.percent}
+                      size="small"
+                      showInfo={false}
+                      strokeColor="#1677ff"
+                    />
+                    <Text className={styles.optionPercent}>
+                      {opt.percent}% ({opt.votes_count})
+                    </Text>
+                  </div>
+                )}
+              </div>
 
               {disabled && optionId === opt.id && (
                 <Button

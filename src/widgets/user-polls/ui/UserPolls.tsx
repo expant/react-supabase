@@ -29,7 +29,10 @@ export function UserPolls() {
                 key={poll.id}
                 poll={poll}
                 actionSlot={
-                  <DeletePollButton pollId={poll.id} onDeleted={loadUserPolls} />
+                  <DeletePollButton
+                    pollId={poll.id}
+                    onDeleted={loadUserPolls}
+                  />
                 }
               />
             ))}

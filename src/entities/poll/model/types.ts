@@ -5,6 +5,11 @@ export type PollOption = {
   id: number;
   text: string;
   position: number;
+  votes_count: number;
+};
+
+export type PollOptionWithPercent = PollOption & {
+  percent: number;
 };
 
 export type PollRow = {
@@ -37,5 +42,5 @@ export type UserPollCardProps = {
 
 export type OnPollInserted = (pollRow: PollRow) => void;
 export type onPollVotesCountUpdated = (
-  data: Pick<PollRow, "id" | "votes_count">
+  data: Pick<PollRow, "id" | "votes_count">,
 ) => void;

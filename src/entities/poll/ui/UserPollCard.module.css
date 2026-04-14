@@ -18,8 +18,20 @@
 
 .options {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.optionHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .optionTag {
@@ -29,6 +41,11 @@
   background: #f5f7ff;
   border-color: #adc6ff;
   color: #2f54eb;
+}
+
+.optionPercent {
+  font-size: 13px;
+  color: #666;
 }
 
 .votes {
@@ -41,4 +58,3 @@
   justify-content: space-between;
   gap: 12px;
 }
-
