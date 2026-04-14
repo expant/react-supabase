@@ -41,6 +41,20 @@ export async function getPollsByAuthor(authorId: string) {
   return pollsWithOptionsVotes;
 }
 
+export async function getOptionVotesByPollId(pollId: number) {
+  const { data, error } = await supabase
+    .from("poll_options_with_votes")
+    .select("id, votes_count")
+    .eq("poll_id", pollId);
+
+  if (error) {
+    console.error("Error fetching option votes:", error);
+    return [];
+  }
+
+  return data;
+}
+
 async function enrichPollsWithOptionVotes(polls: Poll[]): Promise<Poll[]> {
   if (polls.length === 0) return polls;
 

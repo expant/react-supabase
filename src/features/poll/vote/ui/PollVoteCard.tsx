@@ -1,15 +1,22 @@
 import { PollCard } from "@/entities/poll/ui/PollCard";
 import { usePollVote } from "../model/hooks/usePollVote";
 import type { PollVoteCardProps } from "../model/types";
-import { usePollOptionVotes } from "../model/hooks/usePollOptionVotes";
 
 export function PollVoteCard({ poll, userVote }: PollVoteCardProps) {
-  const { optionId, error, isVoted, isLoading, vote, cancel } = usePollVote({
+  const {
+    optionId,
+    error,
+    isVoted,
+    isLoading,
+    vote,
+    cancel,
+    poll: updatedPoll,
+  } = usePollVote({
     pollId: poll.id,
     userVote,
   });
 
-  const { pollWithOptionsVotes } = usePollOptionVotes(poll, isVoted);
+  const displayPoll = updatedPoll ?? poll;
 
   if (error) {
     console.error(error);
@@ -17,11 +24,11 @@ export function PollVoteCard({ poll, userVote }: PollVoteCardProps) {
 
   return (
     <PollCard
-      poll={pollWithOptionsVotes}
+      poll={displayPoll}
       optionId={optionId}
       disabled={isVoted}
       isLoading={isLoading}
-      onChange={vote}
+      onChange={vote(poll)}
       onCancel={cancel}
     />
   );

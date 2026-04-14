@@ -8,6 +8,10 @@ export type PollOption = {
   votes_count: number;
 };
 
+export type PollOptionWithPercent = PollOption & {
+  percent: number;
+};
+
 export type PollRow = {
   id: number;
   question: string;

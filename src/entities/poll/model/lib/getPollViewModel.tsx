@@ -1,11 +1,8 @@
 import { getAvatarUrl } from "@/entities/profile/api/avatarApi";
 import { formatTimeAgo } from "@/shared/utils/formatTimeAgo";
+import { getPercent } from "@/shared/utils/getPercent";
 import type { RadioChangeEvent } from "antd";
-import type { Poll, PollOption } from "../types";
-
-export type PollOptionWithPercent = PollOption & {
-  percent: number;
-};
+import type { Poll, PollOptionWithPercent } from "../types";
 
 export function getPollViewModel(
   poll: Poll,
@@ -28,10 +25,7 @@ export function getPollViewModel(
   const optionsWithPercent: PollOptionWithPercent[] = poll_options.map(
     (option) => ({
       ...option,
-      percent:
-        votes_count > 0
-          ? Math.round((option.votes_count / votes_count) * 100)
-          : 0,
+      percent: getPercent(option.votes_count, votes_count),
     }),
   );
 
