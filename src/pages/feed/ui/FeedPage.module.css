@@ -1,25 +1,27 @@
 .feed {
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 20px;
-	max-width: 1220px;
-	margin: 0 auto;
-	padding: 50px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 50px 0;
 }
 
 .feedContent {
-	flex-direction: column;
-	gap: 15px;
-	min-width: 450px;
+  width: 100%;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 660px;
+  margin: 0 auto;
 }
 
 .newPollsBtn {
-	width: 50%;
-	margin: 0 auto;
-	opacity: 0.85;
-	padding: 15px 0;
+  width: 50%;
+  margin: 0 auto;
+  opacity: 0.85;
+  padding: 15px 0;
 }
 
 .newPollsBtn:hover {
-	opacity: 1;
+  opacity: 1;
 }
