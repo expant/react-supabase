@@ -8,7 +8,7 @@ export function NavigationPanel() {
   return (
     <Flex>
       {pathname !== "/feed" && <Link to="/feed">Лента опросов</Link>}
-      {pathname !== "/profile" && <Link to="/profile">Профиль</Link>}
+      {/* {pathname !== "/profile" && <Link to="/profile">Профиль</Link>} */}
     </Flex>
   );
 }

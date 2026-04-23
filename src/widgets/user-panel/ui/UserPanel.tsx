@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Flex, Typography, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { UserPanelSkeleton } from "@/shared/ui/skeletons/user-panel-skeleton/UserPanelSkeleton";
@@ -16,12 +17,16 @@ export function UserPanel() {
         <UserPanelSkeleton />
       ) : (
         <>
-          <Text className={styles.email}>{profile.username}</Text>
-          <Avatar
-            shape="circle"
-            icon={<UserOutlined />}
-            src={getAvatarUrl(profile.id, profile.avatar_updated_at)}
-          />
+          <Text className={styles.usernameLabel}>{profile.username}</Text>
+          <Link to="/profile">
+            <div className={styles.avatar}>
+              <Avatar
+                shape="circle"
+                icon={<UserOutlined />}
+                src={getAvatarUrl(profile.id, profile.avatar_updated_at)}
+              />
+            </div>
+          </Link>
         </>
       )}
     </Flex>
