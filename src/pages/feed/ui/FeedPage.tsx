@@ -1,24 +1,15 @@
 import { Button, Flex } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { PollList } from "@/widgets/poll-list/ui/PollList";
-import { CreatePollButton } from "@/features/poll/create/ui/CreatePollButton";
-// import { PollFilter } from "@/features/poll/filter/ui/PollFilter";
-import { useFeedPage } from "../model/hooks/useFeedPage";
-// import { usePollFilter } from "@/features/poll/filter/model/hooks/usePollFilter";
+import { usePolls } from "@/entities/poll/model/hooks/usePolls";
 import styles from "./FeedPage.module.css";
 
 export function FeedPage() {
-  const { polls, userVotes, newPollsCount, isLoading, showNewPolls } =
-    useFeedPage();
-
-  // const { filteredPolls, handleFilterChange } = usePollFilter(polls);
+  const { polls, userVotes, isLoading, newPollsCount, showNewPolls } =
+    usePolls();
 
   return (
     <Flex className={styles.feed}>
-      {/* <PollFilter onFilterChange={handleFilterChange} /> */}
-
-      <CreatePollButton onCreated={showNewPolls} />
-
       <Flex className={styles.feedContent}>
         {newPollsCount > 0 && (
           <Button

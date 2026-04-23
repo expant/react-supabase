@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Button } from "antd";
-import { CreatePollModal } from "./CreatePollModal/CreatePollModal";
-import type { CreatePollButtonProps } from "../model/types";
+import { PlusOutlined } from "@ant-design/icons";
+import { CreatePollModal } from "../CreatePollModal/CreatePollModal";
+import type { CreatePollButtonProps } from "../../model/types";
+import styles from "./CreatePollButton.module.css";
 
 export function CreatePollButton({ onCreated }: CreatePollButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +12,13 @@ export function CreatePollButton({ onCreated }: CreatePollButtonProps) {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)} size="large" type="primary">
+      <Button
+        className={styles.btn}
+        onClick={() => setIsOpen(true)}
+        size="large"
+        type="primary"
+      >
+        <PlusOutlined className={styles.btnIcon} />
         Создать опрос
       </Button>
       <CreatePollModal

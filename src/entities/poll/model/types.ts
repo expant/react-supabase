@@ -1,4 +1,5 @@
 import type { Author } from "@/entities/profile/model/types";
+import type { Vote } from "@/entities/vote/model/types";
 import type { ReactNode } from "react";
 
 export type PollOption = {
@@ -44,3 +45,22 @@ export type OnPollInserted = (pollRow: PollRow) => void;
 export type onPollVotesCountUpdated = (
   data: Pick<PollRow, "id" | "votes_count">,
 ) => void;
+
+export type PollsStore = {
+  // State
+  polls: Poll[];
+  userVotes: Record<number, Vote>;
+  newPollsCount: number;
+  isLoading: boolean;
+
+  // Actions
+  loadPolls: () => Promise<void>;
+  loadUserVotes: () => Promise<void>;
+  loadFeed: () => Promise<void>;
+  showNewPolls: () => Promise<void>;
+  addNewPollCount: () => void;
+  initSubscriptions: (userId: string) => {
+    unsubscribeFromNewPolls: () => Promise<"ok" | "timed out" | "error">;
+    unsubscribeFromPollVotesCount: () => void;
+  };
+};

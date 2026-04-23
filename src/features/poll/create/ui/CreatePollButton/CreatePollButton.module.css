@@ -1,0 +1,33 @@
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  background: oklch(65% 0.28 292);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition:
+    opacity 0.15s,
+    box-shadow 0.15s,
+    transform 0.1s;
+  white-space: nowrap;
+  box-shadow: 0 0 20px oklch(65% 0.28 292 / 0.35);
+  outline: 0;
+}
+
+.btn:hover {
+  outline: 0;
+}
+
+.btnIcon {
+  font-size: 14px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
