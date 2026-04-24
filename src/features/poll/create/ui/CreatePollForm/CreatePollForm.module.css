@@ -1,9 +1,293 @@
-.option {
-	display: flex;
-	margin-bottom: 10px;
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #f4f4f5;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.titleIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: oklch(65% 0.28 292 / 0.15);
+  border: 1px solid oklch(65% 0.28 292 / 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: oklch(65% 0.28 292);
+  flex-shrink: 0;
+}
+
+.closeBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: transparent;
+  color: #71717a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.closeBtn:hover {
+  background: #18181d;
+  color: #f4f4f5;
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+/* ── Field wrapper ── */
+.field {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 7px;
+}
+
+/* ── Question input ── */
+.questionInput {
+  width: 100%;
+  height: 42px;
+  background: #18181d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: #f4f4f5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14.5px;
+  padding: 0 14px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.questionInput::placeholder {
+  color: #3f3f46;
+}
+.questionInput:focus {
+  border-color: oklch(65% 0.28 292);
+  background: #111115;
+}
+
+/* Error message */
+.fieldError {
+  font-size: 12px;
+  color: oklch(62% 0.22 18);
+  margin-top: 5px;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ── Options list ── */
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionNum {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #18181d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #3f3f46;
+  flex-shrink: 0;
+  user-select: none;
 }
 
 .optionInput {
-	flex: 1;
-	margin-bottom: 0;
+  flex: 1;
+  height: 40px;
+  background: #18181d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: #f4f4f5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  padding: 0 12px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.optionInput::placeholder {
+  color: #3f3f46;
+}
+.optionInput:focus {
+  border-color: oklch(65% 0.28 292);
+  background: #111115;
+}
+
+/* ── Delete option button ── */
+.deleteBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: #3f3f46;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.deleteBtn:hover {
+  background: oklch(62% 0.22 18 / 0.12);
+  color: oklch(62% 0.22 18);
+}
+
+.deleteBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.deleteBtn:disabled:hover {
+  background: transparent;
+  color: #3f3f46;
+}
+
+/* ── Add option button ── */
+.addBtn {
+  width: 100%;
+  height: 38px;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  color: #71717a;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.addBtn:hover {
+  border-color: oklch(65% 0.28 292);
+  color: oklch(65% 0.28 292);
+  background: oklch(65% 0.28 292 / 0.08);
+}
+
+/* ── Submit button ── */
+.submitBtn {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  background: oklch(65% 0.28 292);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 0 24px oklch(65% 0.28 292 / 0.35);
+  transition:
+    opacity 0.15s,
+    transform 0.1s,
+    box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle inner highlight */
+.submitBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px oklch(65% 0.28 292 / 0.45);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+.submitBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Loading spinner inside submit */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

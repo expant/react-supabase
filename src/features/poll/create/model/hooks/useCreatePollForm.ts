@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Form, message } from "antd";
+import { message } from "antd";
 import { createPoll } from "../../api/createPoll";
 
 export function useCreatePollForm() {
-  const [form] = Form.useForm();
+  const [question, setQuestion] = useState("");
   const [options, setOptions] = useState<string[]>(["", ""]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const isFormValid =
+    question.trim().length > 0 && options.every((o) => o.trim() !== "");
 
   const addOption = () => setOptions([...options, ""]);
 
@@ -23,7 +26,6 @@ export function useCreatePollForm() {
 
   const submit = async () => {
     setIsLoading(true);
-    const question = form.getFieldValue("question");
 
     try {
       await createPoll(question, options);
@@ -35,9 +37,11 @@ export function useCreatePollForm() {
   };
 
   return {
-    form,
+    question,
+    setQuestion,
     options,
     isLoading,
+    isFormValid,
     submit,
     setOptions,
     addOption,

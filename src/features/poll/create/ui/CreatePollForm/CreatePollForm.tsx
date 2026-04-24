@@ -1,95 +1,123 @@
-import { Form, Input, Button, Space, Typography } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
 import { useCreatePollForm } from "../../model/hooks/useCreatePollForm";
+import { BarChartIcon } from "@/shared/ui/icons/BarChartIcon";
+import { CloseIcon } from "@/shared/ui/icons/CloseIcon";
+import { PlusIcon } from "@/shared/ui/icons/PlusIcon";
+import { TrashIcon } from "@/shared/ui/icons/TrashIcon";
+import type { FormEvent } from "react";
 import type { CreatePollFormProps } from "../../model/types";
 import styles from "./CreatePollForm.module.css";
-
-const { Title } = Typography;
 
 export function CreatePollForm({
   onCloseModal,
   onCreated,
 }: CreatePollFormProps) {
   const {
-    form,
-    options,
-    isLoading,
     submit,
+    options,
+    question,
+    setQuestion,
+    isLoading,
+    isFormValid,
     addOption,
     handleOptionChange,
     removeOption,
     canRemoveOption,
   } = useCreatePollForm();
 
-  const handleFinish = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     await submit();
     onCreated();
     onCloseModal();
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={handleFinish}
-      initialValues={{
-        question: "",
-        options: options,
-      }}
-    >
-      <Title level={4}>Создать опрос</Title>
-
-      <Form.Item
-        label="Вопрос"
-        name="question"
-        rules={[{ required: true, message: "Введите вопрос" }]}
-      >
-        <Input />
-      </Form.Item>
-
-      {options.map((option, idx) => (
-        <Space key={idx} align="baseline" className={styles.option}>
-          <Form.Item
-            name={["options", idx]}
-            rules={[{ required: true, message: "Введите вариант" }]}
-            className={styles.optionInput}
-          >
-            <Input
-              placeholder={`Вариант ${idx + 1}`}
-              value={option}
-              onChange={(e) => handleOptionChange(idx, e.target.value)}
-            />
-          </Form.Item>
-
-          {canRemoveOption(options.length, idx) && (
-            <Button
-              onClick={() => removeOption(idx)}
-              icon={<DeleteOutlined />}
-              danger
-            />
-          )}
-        </Space>
-      ))}
-
-      {options.length < 10 && (
-        <Form.Item>
-          <Button type="dashed" onClick={addOption} block>
-            Добавить вариант
-          </Button>
-        </Form.Item>
-      )}
-
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          block
-          disabled={isLoading}
-          loading={isLoading}
+    <form onSubmit={handleSubmit} noValidate>
+      {/* ── Header ── */}
+      <div className={styles.header}>
+        <h2 className={styles.title}>
+          <span className={styles.titleIcon}>
+            <BarChartIcon />
+          </span>
+          Новый опрос
+        </h2>
+        <button
+          type="button"
+          className={styles.closeBtn}
+          onClick={onCloseModal}
+          aria-label="Закрыть"
         >
-          Создать опрос
-        </Button>
-      </Form.Item>
-    </Form>
+          <CloseIcon />
+        </button>
+      </div>
+
+      {/* ── Question ── */}
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="poll-question">
+          Вопрос
+        </label>
+        <input
+          id="poll-question"
+          name="question"
+          className={styles.questionInput}
+          placeholder="Что хочешь узнать?"
+          required
+          autoFocus
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+        />
+      </div>
+
+      {/* ── Options ── */}
+      <div className={styles.field}>
+        <label className={styles.label}>Варианты ответа</label>
+
+        <div className={styles.optionsList}>
+          {options.map((option, idx) => (
+            <div key={idx} className={styles.optionRow}>
+              <div className={styles.optionNum} aria-hidden="true">
+                {idx + 1}
+              </div>
+
+              <input
+                className={styles.optionInput}
+                placeholder={`Вариант ${idx + 1}`}
+                value={option}
+                onChange={(e) => handleOptionChange(idx, e.target.value)}
+                required
+                aria-label={`Вариант ${idx + 1}`}
+              />
+
+              <button
+                type="button"
+                className={styles.deleteBtn}
+                onClick={() => removeOption(idx)}
+                disabled={!canRemoveOption(options.length, idx)}
+                aria-label={`Удалить вариант ${idx + 1}`}
+              >
+                <TrashIcon />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {options.length < 10 && (
+          <button type="button" className={styles.addBtn} onClick={addOption}>
+            <PlusIcon />
+            Добавить вариант
+          </button>
+        )}
+      </div>
+
+      {/* ── Submit ── */}
+      <button
+        type="submit"
+        className={styles.submitBtn}
+        disabled={isLoading || !isFormValid}
+      >
+        {isLoading && <span className={styles.spinner} aria-hidden="true" />}
+        {isLoading ? "Создаём..." : "Создать опрос"}
+      </button>
+    </form>
   );
 }
