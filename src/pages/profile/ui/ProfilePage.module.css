@@ -67,7 +67,7 @@
     color 0.15s;
 }
 
-.menuItem:hover {
+.menuItem:hover:not(.menuItemActive) {
   background: #18181d;
   color: #f4f4f5;
 }
