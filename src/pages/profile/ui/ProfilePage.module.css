@@ -1,11 +1,119 @@
-.layout {
+/* .layout {
   width: 100%;
   margin: 0 auto;
   gap: 20px;
+  background: transparent;
 }
 
 .sider {
-  background: #ffffff;
+  background: transparent;
   border-radius: 10px;
   overflow: hidden;
+} */
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.layout {
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto 60px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+.sider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-self: start;
+  position: sticky;
+  top: 80px;
+}
+
+.sectionLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #3f3f46;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 10px;
+  margin-bottom: 4px;
+  margin-top: 8px;
+}
+
+.sectionLabel:first-child {
+  margin-top: 0;
+}
+
+/* ── Menu item ───────────────────────────────────────────────── */
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #71717a;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.menuItem:hover {
+  background: #18181d;
+  color: #f4f4f5;
+}
+
+.menuItemActive {
+  background: oklch(65% 0.28 292 / 0.15);
+  color: oklch(65% 0.28 292);
+  border-color: oklch(65% 0.28 292 / 0.15);
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.badge {
+  margin-left: auto;
+  background: #1f1f26;
+  color: #71717a;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+
+.menuItemActive .badge {
+  background: oklch(65% 0.28 292 / 0.15);
+  color: oklch(65% 0.28 292);
+}
+
+/* ── Content ─────────────────────────────────────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sider {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sectionLabel {
+    display: none;
+  }
 }
