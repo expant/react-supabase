@@ -16,25 +16,6 @@ export function ProfileSettings() {
     );
   }
 
-  // return (
-  //   <Card title="Настройки профиля" loading={isLoading}>
-  //     <Flex gap="large" className={styles.container}>
-  //       <Flex className={styles.avatarContainer}>
-  //         <AvatarControls profile={profile} refetchProfile={refetchProfile} />
-  //       </Flex>
-
-  //       <Flex vertical gap="middle" className={styles.rightContainer}>
-  //         <UpdateUsernameForm profile={profile} setUsername={setUsername} />
-
-  //         <Flex className={styles.buttonsContainer}>
-  //           <LoggoutButton />
-  //           <DeleteAccountControl />
-  //         </Flex>
-  //       </Flex>
-  //     </Flex>
-  //   </Card>
-  // );
-
   return (
     <div className={styles.card}>
       <div className={styles.cardTitle}>Настройки профиля</div>
