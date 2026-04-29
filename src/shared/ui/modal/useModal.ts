@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
-export function useCreatePollModal(isOpen: boolean, onClose: () => void): void {
-  // Блокировка скролла body
+export function useModal(isOpen: boolean, onClose: () => void): void {
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
 
@@ -10,7 +9,6 @@ export function useCreatePollModal(isOpen: boolean, onClose: () => void): void {
     };
   }, [isOpen]);
 
-  // Закрытие по Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => e.key === "Escape" && onClose();
 
