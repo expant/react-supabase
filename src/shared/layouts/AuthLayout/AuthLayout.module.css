@@ -5,3 +5,11 @@
   justify-content: center;
   padding: 24px;
 }
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
