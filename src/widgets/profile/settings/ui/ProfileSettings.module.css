@@ -23,14 +23,32 @@
 }
 
 .avatarContainer {
-  /* display: flex;
+  display: flex;
   align-items: center;
-  gap: 20px; */
+  gap: 16px;
   padding: 20px;
   background: #18181d;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 8px;
-  /* margin-bottom: 20px; */
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.username {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f4f4f5;
+}
+
+.role {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  color: #71717a;
 }
 
 .rightContainer {

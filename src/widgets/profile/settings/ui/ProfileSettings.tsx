@@ -24,6 +24,10 @@ export function ProfileSettings() {
       <div className={styles.container}>
         <div className={styles.avatarContainer}>
           <AvatarControls profile={profile} refetchProfile={refetchProfile} />
+          <div className={styles.userInfo}>
+            <span className={styles.username}>{profile?.username}</span>
+            <span className={styles.role}>Участник PollFeed</span>
+          </div>
         </div>
 
         <div className={styles.rightContainer}>
