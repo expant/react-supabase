@@ -8,8 +8,6 @@ import {
 } from "../api/poll.realtime";
 import type { PollsStore } from "./types";
 
-let isInitialized = false;
-
 export const usePollsStore = create<PollsStore>((set, get) => ({
   polls: [],
   userVotes: {},
@@ -72,14 +70,6 @@ export const usePollsStore = create<PollsStore>((set, get) => ({
   },
 
   initSubscriptions: (userId: string) => {
-    if (isInitialized) {
-      return {
-        unsubscribeFromNewPolls: async () => "ok" as const,
-        unsubscribeFromPollVotesCount: () => {},
-      };
-    }
-    isInitialized = true;
-
     // Подписка на новые опросы
     const unsubscribeFromNewPolls = subscribeToNewPolls((row) => {
       if (row.author_id === userId) return;

@@ -41,7 +41,5 @@ export function subscribeToPollVotesCount(onUpdated: onPollVotesCountUpdated) {
     )
     .subscribe();
 
-  return () => {
-    supabase.removeChannel(channel);
-  };
+  return () => supabase.removeChannel(channel);
 }
