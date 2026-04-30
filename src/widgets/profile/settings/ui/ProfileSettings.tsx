@@ -3,6 +3,7 @@ import { DeleteAccountControl } from "@/features/profile/delete-account/ui/Delet
 import { UpdateUsernameForm } from "@/features/profile/update-username/ui/UpdateUsernameForm";
 import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
 import { AvatarControls } from "@/features/profile/avatar-controls/ui/AvatarControls";
+import { WarningIcon } from "@/shared/ui/icons/WarningIcon";
 import styles from "./ProfileSettings.module.css";
 
 export function ProfileSettings() {
@@ -28,9 +29,16 @@ export function ProfileSettings() {
         <div className={styles.rightContainer}>
           <UpdateUsernameForm profile={profile} setUsername={setUsername} />
 
-          <div className={styles.buttonsContainer}>
-            <LogoutControl />
-            <DeleteAccountControl />
+          <div className={styles.dangerZone}>
+            <div className={styles.divider} />
+            <span className={styles.dangerLabel}>
+              <WarningIcon />
+              Опасная зона
+            </span>
+            <div className={styles.buttonsContainer}>
+              <LogoutControl />
+              <DeleteAccountControl />
+            </div>
           </div>
         </div>
       </div>
