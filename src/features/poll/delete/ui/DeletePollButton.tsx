@@ -1,29 +1,17 @@
-import { Button, Popconfirm } from "antd";
-import { useDeletePoll } from "../model/hooks/useDeletePoll";
+import { TrashIcon } from "@/shared/ui/icons/TrashIcon";
 import type { DeletePollButtonProps } from "../model/types";
-import styles from "./DeletePollButton.module.css";
+import styles from "./DeletePollControl.module.css";
 
-export function DeletePollButton({ pollId, onDeleted }: DeletePollButtonProps) {
-  const { isLoading, handleDelete } = useDeletePoll();
-
-  const onConfirm = async () => {
-    await handleDelete(pollId);
-    onDeleted();
-  };
-
+export function DeletePollButton({ onClick, isLoading }: DeletePollButtonProps) {
   return (
-    <Popconfirm
-      title="Вы уверены, что хотите удалить опрос?"
-      description="Действие нельзя отменить."
-      okText="Да"
-      cancelText="Нет"
-      okButtonProps={{ danger: true, loading: isLoading }}
-      onConfirm={onConfirm}
+    <button
+      className={styles.trashBtn}
+      onClick={onClick}
+      disabled={isLoading}
+      type="button"
+      aria-label="Удалить опрос"
     >
-      <Button danger className={styles.button} loading={isLoading}>
-        Удалить
-      </Button>
-    </Popconfirm>
+      <TrashIcon />
+    </button>
   );
 }
-
