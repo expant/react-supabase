@@ -1,4 +1,4 @@
-import { LoggoutButton } from "@/features/auth/logout/ui/LogoutButton";
+import { LogoutControl } from "@/features/auth/logout/ui/LogoutControl";
 import { DeleteAccountControl } from "@/features/profile/delete-account/ui/DeleteAccountControl";
 import { UpdateUsernameForm } from "@/features/profile/update-username/ui/UpdateUsernameForm";
 import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
@@ -29,7 +29,7 @@ export function ProfileSettings() {
           <UpdateUsernameForm profile={profile} setUsername={setUsername} />
 
           <div className={styles.buttonsContainer}>
-            <LoggoutButton />
+            <LogoutControl />
             <DeleteAccountControl />
           </div>
         </div>
