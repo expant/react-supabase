@@ -8,6 +8,8 @@ import {
 } from "../api/poll.realtime";
 import type { PollsStore } from "./types";
 
+let isInitialized = false;
+
 export const usePollsStore = create<PollsStore>((set, get) => ({
   polls: [],
   userVotes: {},
@@ -70,23 +72,38 @@ export const usePollsStore = create<PollsStore>((set, get) => ({
   },
 
   initSubscriptions: (userId: string) => {
+    if (isInitialized) {
+      return {
+        unsubscribeFromNewPolls: async () => "ok" as const,
+        unsubscribeFromPollVotesCount: () => {},
+      };
+    }
+    isInitialized = true;
+
     // Подписка на новые опросы
-    const unsubscribeFromNewPolls = subscribeToNewPolls((row) => {
+    const cleanupNewPolls = subscribeToNewPolls((row) => {
       if (row.author_id === userId) return;
       get().addNewPollCount();
     });
 
     // Подписка на обновление количества голосов
-    const unsubscribeFromPollVotesCount = subscribeToPollVotesCount(
-      ({ id, votes_count }) => {
-        set((state) => ({
-          polls: state.polls.map((p) =>
-            p.id === id ? { ...p, votes_count } : p,
-          ),
-        }));
-      },
-    );
+    const cleanupVotes = subscribeToPollVotesCount(({ id, votes_count }) => {
+      set((state) => ({
+        polls: state.polls.map((p) =>
+          p.id === id ? { ...p, votes_count } : p,
+        ),
+      }));
+    });
 
-    return { unsubscribeFromNewPolls, unsubscribeFromPollVotesCount };
+    return {
+      unsubscribeFromNewPolls: async () => {
+        isInitialized = false;
+        return cleanupNewPolls();
+      },
+      unsubscribeFromPollVotesCount: () => {
+        isInitialized = false;
+        cleanupVotes();
+      },
+    };
   },
 }));
