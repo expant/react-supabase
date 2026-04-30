@@ -1,9 +1,38 @@
-.authPage {
-	min-height: 100vh;
-	width: 100%;
+.tabs {
+  display: flex;
+  gap: 4px;
 }
 
-.tabs {
-	min-width: 300px;
-	min-height: 400px;
+.tab {
+  flex: 1;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #71717a;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.tab:hover {
+  color: #f4f4f5;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabActive {
+  color: #f4f4f5;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 20px 0;
+}
+
+.content {
+  /* intentionally empty — forms handle their own spacing */
 }
