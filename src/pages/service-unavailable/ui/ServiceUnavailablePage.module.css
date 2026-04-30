@@ -1,0 +1,76 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #111115;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: oklch(62% 0.22 18 / 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.icon {
+  color: oklch(62% 0.22 18);
+}
+
+.title {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f4f4f5;
+  letter-spacing: -0.3px;
+}
+
+.description {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  color: #71717a;
+  line-height: 1.6;
+}
+
+.retryBtn {
+  margin-top: 8px;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  background: oklch(65% 0.28 292);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 16px oklch(65% 0.28 292 / 0.35);
+  transition: box-shadow 0.2s;
+}
+
+.retryBtn:hover {
+  box-shadow: 0 4px 20px oklch(65% 0.28 292 / 0.55);
+}

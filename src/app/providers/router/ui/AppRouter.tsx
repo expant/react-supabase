@@ -5,6 +5,7 @@ import { PublicRoute } from '../guards/PublicRoute';
 import { RecoveryRoute } from '../guards/RecoveryRoute';
 import { FeedPage } from '@/pages/feed/ui/FeedPage';
 import { NotFoundPage } from '@/pages/not-found/ui/NotFoundPage';
+import { ServiceUnavailablePage } from '@/pages/service-unavailable/ui/ServiceUnavailablePage';
 import { ResetPasswordPage } from '@/pages/auth/ui/ResetPasswordPage/ResetPasswordPage';
 import { NewPasswordPage } from '@/pages/auth/ui/NewPasswordPage/NewPasswordPage';
 import { ProfilePage } from '@/pages/profile/ui/ProfilePage';
@@ -36,6 +37,7 @@ export function AppRouter() {
 				</Route>
 			</Route>
 
+			<Route path='error' element={<ServiceUnavailablePage />} />
 			<Route path='*' element={<NotFoundPage />} />
 		</Routes>
 	);
