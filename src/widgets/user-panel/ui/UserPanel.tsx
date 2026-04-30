@@ -16,16 +16,14 @@ export function UserPanel() {
       {!profile || isLoading ? (
         <UserPanelSkeleton />
       ) : (
-        <>
+        <Link to="/profile" className={styles.link}>
           <Text className={styles.usernameLabel}>{profile.username}</Text>
-          <Link to="/profile">
-            <UserAvatar
-              username={profile.username}
-              src={getAvatarUrl(profile.id, profile.avatar_updated_at)}
-              size={34}
-            />
-          </Link>
-        </>
+          <UserAvatar
+            username={profile.username}
+            src={getAvatarUrl(profile.id, profile.avatar_updated_at)}
+            size={34}
+          />
+        </Link>
       )}
     </Flex>
   );

@@ -4,9 +4,20 @@
   justify-content: flex-end;
 }
 
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link:hover .usernameLabel {
+  color: #f4f4f5;
+}
+
 .usernameLabel {
   font-size: 13px;
   color: #71717a;
   font-family: "DM Sans", sans-serif;
+  transition: color 0.15s;
 }
 
