@@ -1,5 +1,6 @@
-import { Button, Card, Skeleton, Typography, Avatar, Space, Tag } from "antd";
+import { Button, Card, Skeleton, Typography, Space, Tag } from "antd";
 import { CheckOutlined, TeamOutlined } from "@ant-design/icons";
+import { UserAvatar } from "@/shared/ui/user-avatar/UserAvatar";
 import { getPollViewModel } from "../model/lib/getPollViewModel";
 import type { PollCardProps, PollOptionWithPercent } from "../model/types";
 import styles from "./PollCard.module.css";
@@ -63,9 +64,11 @@ export function PollCard({
       {/* ── Header ── */}
       <div className={styles.cardHeader}>
         <Space size={10} align="center">
-          <Avatar size={34} src={avatarUrl} className={styles.authorAvatar}>
-            {author?.username.charAt(0).toUpperCase()}
-          </Avatar>
+          <UserAvatar
+            username={author?.username ?? ""}
+            src={avatarUrl}
+            size={34}
+          />
 
           <div className={styles.authorMeta}>
             <Text className={styles.authorName}>{author?.username}</Text>

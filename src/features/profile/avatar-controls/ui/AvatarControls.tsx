@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useAvatar } from "../model/hooks/useAvatar";
-import { UserIcon } from "@/shared/ui/icons/UserIcon";
+import { UserAvatar } from "@/shared/ui/user-avatar/UserAvatar";
 import { TrashIcon } from "@/shared/ui/icons/TrashIcon";
 import { UploadIcon } from "@/shared/ui/icons/UploadIcon";
 import { CameraIcon } from "@/shared/ui/icons/CameraIcon";
@@ -32,13 +32,11 @@ export function AvatarControls({
 
   return (
     <div className={styles.avatarContainer}>
-      <div className={styles.avatar}>
-        {avatarUrl ? (
-          <img src={avatarUrl} alt="Аватар" className={styles.avatarImg} />
-        ) : (
-          <UserIcon />
-        )}
-      </div>
+      <UserAvatar
+        username={profile?.username ?? ""}
+        src={avatarUrl}
+        size={96}
+      />
 
       <button
         className={styles.cameraButton}
