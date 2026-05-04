@@ -1,18 +1,12 @@
-import { useNavigate } from "react-router";
-import { Button } from "antd";
-import { logout } from "../api/logout";
+import { LogoutIcon } from "@/shared/ui/icons/LogoutIcon";
+import type { LogoutButtonProps } from "../model/types";
+import styles from "./LogoutControl.module.css";
 
-export function LoggoutButton() {
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/auth");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return <Button onClick={handleLogout}>Выйти из аккаунта</Button>;
+export function LogoutButton({ onClick }: LogoutButtonProps) {
+  return (
+    <button className={styles.logoutBtn} onClick={onClick}>
+      <LogoutIcon />
+      Выйти из аккаунта
+    </button>
+  );
 }

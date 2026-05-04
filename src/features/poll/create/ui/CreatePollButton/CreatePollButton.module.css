@@ -1,0 +1,36 @@
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  background: oklch(65% 0.28 292);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 0 16px oklch(65% 0.28 292 / 0.35);
+  transition: box-shadow 0.2s;
+}
+
+.btn:hover {
+  box-shadow: 0 4px 20px oklch(65% 0.28 292 / 0.55);
+}
+
+.skeleton {
+  width: 130px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #18181d 25%, #1f1f26 50%, #18181d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

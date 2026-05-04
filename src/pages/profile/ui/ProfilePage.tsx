@@ -1,14 +1,22 @@
 import { useState } from "react";
-import type { ReactNode } from "react";
-import { Layout, Menu, Empty } from "antd";
+import { useUser } from "@/features/auth/model/hooks/useUser";
+import { usePolls } from "@/entities/poll/model/hooks/usePolls";
 import { UserPolls } from "@/widgets/user-polls/ui/UserPolls";
 import { ProfileSettings } from "@/widgets/profile/settings/ui/ProfileSettings";
+import { PollsIcon } from "@/shared/ui/icons/PollsIcon";
+import { SettingsIcon } from "@/shared/ui/icons/SettingsIcon";
+import type { ReactNode } from "react";
 import styles from "./ProfilePage.module.css";
 
-const { Sider, Content } = Layout;
+type MenuKey = "settings" | "userPolls";
 
 export function ProfilePage() {
-  const [currentMenuKey, setCurrentMenuKey] = useState("settings");
+  const [currentMenuKey, setCurrentMenuKey] = useState<MenuKey>("settings");
+
+  const user = useUser();
+  const { polls } = usePolls();
+
+  const userPolls = polls.filter((p) => p.author_id === user.id);
 
   const contentMap: Record<string, ReactNode> = {
     settings: <ProfileSettings />,
@@ -16,19 +24,29 @@ export function ProfilePage() {
   };
 
   return (
-    <Layout className={styles.layout}>
-      <Sider className={styles.sider} theme="light">
-        <Menu
-          mode="inline"
-          selectedKeys={[currentMenuKey]}
-          onClick={({ key }) => setCurrentMenuKey(key)}
-          items={[{ key: "settings", label: "Настройки" }, { key: "userPolls", label: "Мои опросы" }]}
-        ></Menu>
-      </Sider>
+    <div className={styles.layout}>
+      <aside className={styles.sider}>
+        <span className={styles.sectionLabel}>Аккаунт</span>
 
-      <Content>
-        {contentMap[currentMenuKey] || <Empty description="Нет данных" />}
-      </Content>
-    </Layout>
+        <button
+          className={`${styles.menuItem} ${currentMenuKey === "settings" ? styles.menuItemActive : ""}`}
+          onClick={() => setCurrentMenuKey("settings")}
+        >
+          <SettingsIcon />
+          Настройки
+        </button>
+
+        <button
+          className={`${styles.menuItem} ${currentMenuKey === "userPolls" ? styles.menuItemActive : ""}`}
+          onClick={() => setCurrentMenuKey("userPolls")}
+        >
+          <PollsIcon />
+          Мои опросы
+          <span className={styles.badge}>{userPolls.length}</span>
+        </button>
+      </aside>
+
+      <main className={styles.content}>{contentMap[currentMenuKey]}</main>
+    </div>
   );
 }

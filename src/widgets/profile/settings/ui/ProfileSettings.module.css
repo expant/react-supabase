@@ -1,17 +1,119 @@
+.card {
+  position: relative;
+  background: #111115;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.cardTitle {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f4f4f5;
+  letter-spacing: -0.3px;
+  margin-bottom: 28px;
+}
+
 .container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 40px;
+  width: 100%;
 }
 
 .avatarContainer {
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #18181d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.username {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f4f4f5;
+}
+
+.role {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  color: #71717a;
 }
 
 .rightContainer {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dangerZone {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.dangerLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: oklch(62% 0.22 18);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
 }
 
 .buttonsContainer {
+  display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+/* Loading skeleton */
+.skeleton {
+  height: 120px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #18181d 25%, #1f1f26 50%, #18181d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .buttonsContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

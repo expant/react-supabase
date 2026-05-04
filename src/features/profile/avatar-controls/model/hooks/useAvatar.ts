@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { message, Upload } from "antd";
 import {
   deleteAvatar,
   uploadAvatar,
   getAvatarUrl,
 } from "@/entities/profile/api/avatarApi";
-import type { UploadProps } from "antd/es/upload";
 import type { UseAvatarArgs } from "../types";
 
 const AVATAR_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -13,6 +11,7 @@ const AVATAR_TYPES = ["image/jpeg", "image/png", "image/webp"];
 export function useAvatar({ profile, refetchProfile }: UseAvatarArgs) {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!profile) return;
@@ -27,37 +26,38 @@ export function useAvatar({ profile, refetchProfile }: UseAvatarArgs) {
     if (!profile) return;
 
     setIsLoading(true);
+    setError(null);
 
     try {
       await uploadAvatar(profile.id, file);
       await refetchProfile();
     } catch (e) {
-      message.error(e instanceof Error ? e.message : "Ошибка загрузки аватара");
+      setError(e instanceof Error ? e.message : "Ошибка загрузки аватара");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleBeforeUpload: UploadProps["beforeUpload"] = async (file) => {
+  const handleFileChange = async (file: File) => {
     if (!AVATAR_TYPES.includes(file.type)) {
-      message.error("Недопустимый тип файла. Допустимые типы: jpeg, png, webp");
-      return Upload.LIST_IGNORE;
+      setError("Недопустимый тип файла. Допустимые типы: jpeg, png, webp");
+      return;
     }
 
     await handleUpload(file);
-    return false;
   };
 
   const handleDeleteAvatar = async () => {
     if (!profile) return;
 
     setIsLoading(true);
+    setError(null);
 
     try {
       await deleteAvatar(profile.id);
       await refetchProfile();
     } catch (e) {
-      message.error(e instanceof Error ? e.message : "Ошибка удаления аватара");
+      setError(e instanceof Error ? e.message : "Ошибка удаления аватара");
     } finally {
       setIsLoading(false);
     }
@@ -66,8 +66,9 @@ export function useAvatar({ profile, refetchProfile }: UseAvatarArgs) {
   return {
     avatarUrl,
     isLoading,
+    error,
     handleUpload,
-    handleBeforeUpload,
+    handleFileChange,
     handleDeleteAvatar,
   };
 }

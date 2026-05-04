@@ -3,3 +3,5 @@ export type SignUpFormValues = {
 	password: string;
 	username: string;
 };
+
+export type SignUpFormErrors = Partial<SignUpFormValues & { confirmPassword: string }>;

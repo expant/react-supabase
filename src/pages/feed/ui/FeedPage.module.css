@@ -1,25 +1,71 @@
 .feed {
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 20px;
-	max-width: 1220px;
-	margin: 0 auto;
-	padding: 50px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 50px 0;
 }
 
 .feedContent {
-	flex-direction: column;
-	gap: 15px;
-	min-width: 450px;
+  width: 100%;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 660px;
+  margin: 0 auto;
 }
 
 .newPollsBtn {
-	width: 50%;
-	margin: 0 auto;
-	opacity: 0.85;
-	padding: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+  padding: 8px 16px 8px 14px;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid oklch(65% 0.28 292 / 0.35);
+  border-radius: 999px;
+  color: #a78bfa;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
 .newPollsBtn:hover {
-	opacity: 1;
+  background: rgba(139, 92, 246, 0.12);
+  border-color: oklch(65% 0.28 292 / 0.65);
+  box-shadow: 0 0 16px oklch(65% 0.28 292 / 0.18);
+  color: #c4b5fd;
+}
+
+.newPollsIcon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.newPollsText {
+  white-space: nowrap;
+}
+
+.newPollsBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 17px;
+  padding: 0 6px;
+  background: oklch(65% 0.28 292);
+  border-radius: 5px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(65% 0.28 292 / 0.5); }
+  50%       { box-shadow: 0 0 0 5px oklch(65% 0.28 292 / 0); }
 }

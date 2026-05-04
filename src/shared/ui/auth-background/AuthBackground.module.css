@@ -1,0 +1,56 @@
+.background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cardWrap {
+  position: absolute;
+  opacity: 0.45;
+}
+
+.cardRepel {
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card1 {
+  top: calc(50% - 310px);
+  left: calc(50% - 740px);
+  rotate: -2deg;
+  animation: float 5s ease-in-out infinite alternate;
+}
+
+.card2 {
+  top: calc(50% + 90px);
+  left: calc(50% - 610px);
+  rotate: 1.5deg;
+  animation: float 6.5s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+.card3 {
+  top: calc(50% - 160px);
+  right: calc(50% - 650px);
+  rotate: 1deg;
+  animation: float 4.8s ease-in-out infinite alternate;
+  animation-delay: 0.6s;
+}
+
+.card4 {
+  top: calc(50% + 140px);
+  right: calc(50% - 545px);
+  rotate: -1.5deg;
+  animation: float 7s ease-in-out infinite alternate;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-14px);
+  }
+}

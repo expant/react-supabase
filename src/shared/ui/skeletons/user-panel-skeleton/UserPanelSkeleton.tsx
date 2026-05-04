@@ -1,10 +1,10 @@
-import { Skeleton } from "antd";
+import styles from "./UserPanelSkeleton.module.css";
 
 export function UserPanelSkeleton() {
   return (
-    <>
-      <Skeleton.Input size="small" active />
-      <Skeleton.Avatar active size="default" />
-    </>
+    <div className={styles.wrapper}>
+      <div className={styles.text} />
+      <div className={styles.avatar} />
+    </div>
   );
 }

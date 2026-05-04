@@ -1,58 +1,49 @@
-import { Card, Space, Tag, Typography, Progress } from "antd";
-import type { UserPollCardProps } from "../model/types";
+import { formatTimeAgo } from "@/shared/utils/formatTimeAgo";
 import { getPercent } from "@/shared/utils/getPercent";
+import { PollsIcon } from "@/shared/ui/icons/PollsIcon";
+import type { UserPollCardProps } from "../model/types";
 import styles from "./UserPollCard.module.css";
 
-const { Text } = Typography;
-
 export function UserPollCard({ poll, actionSlot }: UserPollCardProps) {
-  const { question, poll_options, votes_count } = poll;
-
-  const hasVotes = votes_count > 0;
+  const { question, poll_options, votes_count, created_at } = poll;
 
   return (
-    <Card className={styles.card}>
-      <Space orientation="vertical" size={12} className={styles.inner}>
-        <Text strong className={styles.question}>
-          {question}
-        </Text>
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
+        <span className={styles.time}>{formatTimeAgo(created_at)}</span>
+        {actionSlot}
+      </div>
 
-        <div className={styles.options}>
-          {poll_options.map((opt) => {
-            const percent = getPercent(opt.votes_count, votes_count);
+      <p className={styles.question}>{question}</p>
 
-            return (
-              <div key={opt.id} className={styles.optionItem}>
-                <div className={styles.optionHeader}>
-                  <Tag className={styles.optionTag}>{opt.text}</Tag>
-                  {hasVotes && (
-                    <Text className={styles.optionPercent}>
-                      {percent}% ({opt.votes_count})
-                    </Text>
-                  )}
-                </div>
-                {hasVotes && (
-                  <Progress
-                    percent={percent}
-                    size="small"
-                    showInfo={false}
-                    strokeColor="#2f54eb"
-                    railColor="#f0f0f0"
-                  />
-                )}
+      <div className={styles.options}>
+        {poll_options.map((opt) => {
+          const percent = getPercent(opt.votes_count, votes_count);
+
+          return (
+            <div key={opt.id} className={styles.option}>
+              <div
+                className={styles.optionFill}
+                style={{ width: `${percent}%` }}
+              />
+              <div className={styles.optionContent}>
+                <span className={styles.optionText}>{opt.text}</span>
+                <span className={styles.optionPct}>
+                  {percent}%{" "}
+                  <span className={styles.optionCount}>
+                    ({opt.votes_count})
+                  </span>
+                </span>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
+      </div>
 
-        <div className={styles.footer}>
-          <Text type="secondary" className={styles.votes}>
-            Проголосовало: {votes_count}
-          </Text>
-
-          {actionSlot}
-        </div>
-      </Space>
-    </Card>
+      <div className={styles.footer}>
+        <PollsIcon size={11} />
+        <span className={styles.votes}>{votes_count} голосов</span>
+      </div>
+    </div>
   );
 }

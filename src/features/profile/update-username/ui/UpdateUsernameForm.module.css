@@ -2,6 +2,94 @@
   width: 100%;
 }
 
-.formItem :global(.ant-form-item-label > label) {
+.label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
   font-weight: 600;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 7px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+  height: 42px;
+  background: #18181d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: #f4f4f5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14.5px;
+  padding: 0 14px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.input::placeholder {
+  color: #3f3f46;
+}
+
+.input:focus {
+  border-color: oklch(65% 0.28 292);
+  background: #111115;
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.saveBtn {
+  height: 42px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: oklch(65% 0.28 292);
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 16px oklch(65% 0.28 292 / 0.35);
+  transition: box-shadow 0.2s;
+}
+
+.saveBtn:hover {
+  box-shadow: 0 4px 20px oklch(65% 0.28 292 / 0.55);
+}
+
+.saveBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

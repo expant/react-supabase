@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Modal } from "@/shared/ui/modal/Modal";
 import { CreatePollForm } from "../CreatePollForm/CreatePollForm";
 import type { CreatePollModalProps } from "../../model/types";
 
@@ -8,13 +8,7 @@ export function CreatePollModal({
   onCreated,
 }: CreatePollModalProps) {
   return (
-    <Modal
-      open={isOpen}
-      onCancel={onClose}
-      footer={null}
-      destroyOnHidden
-      centered
-    >
+    <Modal isOpen={isOpen} onClose={onClose}>
       <CreatePollForm onCloseModal={onClose} onCreated={onCreated} />
     </Modal>
   );

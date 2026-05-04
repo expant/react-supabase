@@ -1,30 +1,51 @@
-import { Card, Flex } from "antd";
-import { LoggoutButton } from "@/features/auth/logout/ui/LogoutButton";
+import { LogoutControl } from "@/features/auth/logout/ui/LogoutControl";
 import { DeleteAccountControl } from "@/features/profile/delete-account/ui/DeleteAccountControl";
 import { UpdateUsernameForm } from "@/features/profile/update-username/ui/UpdateUsernameForm";
 import { useProfile } from "@/app/providers/profile/model/hooks/useProfile";
 import { AvatarControls } from "@/features/profile/avatar-controls/ui/AvatarControls";
+import { WarningIcon } from "@/shared/ui/icons/WarningIcon";
 import styles from "./ProfileSettings.module.css";
 
 export function ProfileSettings() {
   const { profile, isLoading, setUsername, refetchProfile } = useProfile();
 
-  return (
-    <Card title="Настройки профиля" loading={isLoading}>
-      <Flex gap="large" className={styles.container}>
-        <Flex className={styles.avatarContainer}>
-          <AvatarControls profile={profile} refetchProfile={refetchProfile} />
-        </Flex>
+  if (isLoading) {
+    return (
+      <div className={styles.card}>
+        <div className={styles.skeleton} />
+      </div>
+    );
+  }
 
-        <Flex vertical gap="middle" className={styles.rightContainer}>
+  return (
+    <div className={styles.card}>
+      <div className={styles.cardTitle}>Настройки профиля</div>
+
+      <div className={styles.container}>
+        <div className={styles.avatarContainer}>
+          <AvatarControls profile={profile} refetchProfile={refetchProfile} />
+          <div className={styles.userInfo}>
+            <span className={styles.username}>{profile?.username}</span>
+            <span className={styles.role}>Участник PollFeed</span>
+          </div>
+        </div>
+
+        <div className={styles.rightContainer}>
           <UpdateUsernameForm profile={profile} setUsername={setUsername} />
 
-          <Flex className={styles.buttonsContainer}>
-            <LoggoutButton />
-            <DeleteAccountControl />
-          </Flex>
-        </Flex>
-      </Flex>
-    </Card>
+          <div className={styles.dangerZone}>
+            <div className={styles.divider} />
+            <span className={styles.dangerLabel}>
+              <WarningIcon />
+              Опасная зона
+            </span>
+            <div className={styles.buttonsContainer}>
+              <LogoutControl />
+              <DeleteAccountControl />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

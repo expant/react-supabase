@@ -1,7 +1,6 @@
 import { Outlet } from "react-router";
 import { Layout } from "antd";
 import { LayoutHeader } from "@/widgets/layout-header/LayoutHeader";
-import { LayoutFooter } from "@/widgets/layout-footer/LayoutFooter";
 import { ProfileProvider } from "@/app/providers/profile/ProfileProvider";
 import styles from "./MainLayout.module.css";
 
@@ -17,7 +16,6 @@ export function MainLayout() {
             <Outlet />
           </div>
         </Content>
-        <LayoutFooter />
       </Layout>
     </ProfileProvider>
   );

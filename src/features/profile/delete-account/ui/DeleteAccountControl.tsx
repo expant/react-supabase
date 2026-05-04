@@ -1,21 +1,19 @@
-import { Button } from "antd";
-import { DeleteAccountModal } from "./DeleteAcountModal";
+import { useState } from "react";
+import { DeleteAccountButton } from "./DeleteAccountButton";
+import { DeleteAccountModal } from "./DeleteAccountModal";
 import { useDeleteAccount } from "../model/hooks/useDeleteAccount";
-import { useDeleteAccountModal } from "../model/hooks/useDeleteAccountModal";
 
 export function DeleteAccountControl() {
+  const [isOpen, setIsOpen] = useState(false);
   const { isLoading, handleDelete } = useDeleteAccount();
-  const { isOpen, openModal, closeModal } = useDeleteAccountModal();
 
   return (
     <>
-      <Button danger onClick={openModal}>
-        Удалить аккаунт
-      </Button>
+      <DeleteAccountButton onClick={() => setIsOpen(true)} />
       <DeleteAccountModal
         isOpen={isOpen}
         isLoading={isLoading}
-        onClose={closeModal}
+        onClose={() => setIsOpen(false)}
         onDelete={handleDelete}
       />
     </>
