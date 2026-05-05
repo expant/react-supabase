@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { message } from "antd";
 import type { Poll } from "@/entities/poll/model/types";
 import { getPollsByAuthor } from "@/entities/poll/api/poll.api";
@@ -10,23 +10,22 @@ export function useUserPolls() {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadUserPolls = async () => {
+  const loadUserPolls = useCallback(async () => {
     try {
       const data = await getPollsByAuthor(user.id);
       setPolls(data);
     } catch (e) {
       message.error(
-        e instanceof Error ? e.message : "Не удалось загрузить ваши опросы"
+        e instanceof Error ? e.message : "Не удалось загрузить ваши опросы",
       );
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [user.id]);
 
   useEffect(() => {
     loadUserPolls();
-  }, []);
+  }, [loadUserPolls]);
 
   return { polls, isLoading, loadUserPolls };
 }
-

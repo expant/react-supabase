@@ -35,7 +35,6 @@ export async function getPollsByAuthor(authorId: string) {
   }
 
   const polls = data as unknown as Poll[];
-
   const pollsWithOptionsVotes = await enrichPollsWithOptionVotes(polls);
 
   return pollsWithOptionsVotes;

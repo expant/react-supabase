@@ -3,20 +3,22 @@ import { usePollsStore } from "../store";
 import { useUser } from "@/features/auth/model/hooks/useUser";
 
 export function usePolls() {
-  const store = usePollsStore();
   const user = useUser();
+  const store = usePollsStore();
+  const loadFeed = usePollsStore((s) => s.loadFeed);
+  const initSubscriptions = usePollsStore((s) => s.initSubscriptions);
 
   useEffect(() => {
     const { unsubscribeFromNewPolls, unsubscribeFromPollVotesCount } =
-      store.initSubscriptions(user.id);
+      initSubscriptions(user.id);
 
-    store.loadFeed();
+    loadFeed();
 
     return () => {
       unsubscribeFromNewPolls();
       unsubscribeFromPollVotesCount();
     };
-  }, [user.id]);
+  }, [user.id, initSubscriptions, loadFeed]);
 
   return store;
 }

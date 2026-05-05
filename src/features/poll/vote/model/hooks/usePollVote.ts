@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { sendVote, cancelVote } from "@/entities/vote/api/voteApi";
 import { getOptionVotesByPollId } from "@/entities/poll/api/poll.api";
 import type { Poll } from "@/entities/poll/model/types";
@@ -6,15 +6,12 @@ import type { UsePollVoteProps } from "../types";
 
 export function usePollVote({ pollId, userVote }: UsePollVoteProps) {
   const [poll, setPoll] = useState<Poll | null>(null);
-  const [optionId, setOptionId] = useState<number | null>(null);
-  const [isVoted, setIsVoted] = useState(false);
+  const [optionId, setOptionId] = useState<number | null>(
+    userVote?.option_id ?? null,
+  );
+  const [isVoted, setIsVoted] = useState(!!userVote);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setOptionId(userVote?.option_id ?? null);
-    setIsVoted(!!userVote);
-  }, [userVote]);
 
   const vote = (currentPoll: Poll) => (optionId: number) => {
     setIsLoading(true);
